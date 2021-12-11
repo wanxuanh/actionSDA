@@ -1,14 +1,14 @@
-# actionSDA
-<!DOCTYPE html>
+# Action, SDA!
 <html>
 <body>
 
-<h2>Action, SDA!</h2>
 
 <p>Groups of 5 only:</p>
 
 
-<p> "Hi, show your otter please! vaccinated!"</p>
+<p> "Hi, show your otter pass please! vaccinated!"</p>
 
+  <h1> construction in progress </h1>
+  <h3> please come back later.. </h3>
 </body>
 </html>
