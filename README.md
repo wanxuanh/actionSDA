@@ -8,18 +8,25 @@ Project #1: Action, SDA!
     Use Javascript for DOM manipulation
     Hosted on Github pages
     Commits to Github frequently
-    A README.md file with explanations of the technologies used, the approach taken, a link to your live site, installation instructions, unsolved problems, etc.
+    A README.md file with explanations of the technologies used,
+    the approach taken, a link to your live site, installation instructions, unsolved problems, etc.
     Be displayed in the browser
     Have some kind of user interaction via mouseclick or keypress
 
 
-Project Timeline
+  # Project Timeline
     Week 1:
     Week 2:
     Week 3:
     Week 4:
 
-Game play:
+  # Technologies used
+    
+   Approach taken
+    
+   
+    
+<h2>Game play: </h2>
 
 <p>Groups of 5 only:</p>
 
