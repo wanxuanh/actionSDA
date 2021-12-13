@@ -15,7 +15,7 @@ Project #1: Action, SDA!
 
 
   # Project Timeline
-    Week 1:
+    Week 1 (Ideation): Defining Game play, look for images, research what logic/calculation for the game
     Week 2:
     Week 3:
     Week 4:
