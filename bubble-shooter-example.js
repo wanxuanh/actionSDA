@@ -38,11 +38,11 @@ window.onload = function() {
         y: 83,          // Y position
         width: 0,       // Width, gets calculated
         height: 0,      // Height, gets calculated
-        columns: 15,    // Number of tile columns
-        rows: 14,       // Number of tile rows
+        columns: 30,    // Number of tile columns
+        rows: 12,       // Number of tile rows
         tilewidth: 40,  // Visual width of a tile
         tileheight: 40, // Visual height of a tile
-        rowheight: 34,  // Height of a row
+        rowheight: 40,  // Height of a row
         radius: 20,     // Bubble collision radius
         tiles: []       // The two-dimensional tile array
     };
@@ -69,7 +69,7 @@ window.onload = function() {
                     x: 0,
                     y: 0,
                     angle: 0,
-                    speed: 1000,
+                    speed: 500,
                     dropspeed: 900,
                     tiletype: 0,
                     visible: false
@@ -86,7 +86,7 @@ window.onload = function() {
                             [[1, 0], [1, 1], [0, 1], [-1, 0], [0, -1], [1, -1]]];  // Odd row tiles
     
     // Number of different colors
-    var bubblecolors = 7;
+    var bubblecolors = 6;
     
     // Game states
     var gamestates = { init: 0, ready: 1, shootbubble: 2, removecluster: 3, gameover: 4 };
@@ -110,6 +110,7 @@ window.onload = function() {
     // Images
     var images = [];
     var bubbleimage;
+    //var playerimage;
     
     // Image loading global variables
     var loadcount = 0;
@@ -152,12 +153,17 @@ window.onload = function() {
     // Initialize the game
     function init() {
         // Load images
-        images = loadImages(["bubble-sprites.png"]);
+        images = loadImages(["virus3.png"]);
         bubbleimage = images[0];
+    
+        //images = loadImages(["sda.png"]);
+        //playerimage = images[1];
     
         // Add mouse events
         canvas.addEventListener("mousemove", onMouseMove);
         canvas.addEventListener("mousedown", onMouseDown);
+
+        //Add Keyboard events
         
         // Initialize the two-dimensional tile array
         for (var i=0; i<level.columns; i++) {
@@ -174,11 +180,12 @@ window.onload = function() {
         // Init the player
         player.x = level.x + level.width/2 - level.tilewidth/2;
         player.y = level.y + level.height;
-        player.angle = 90;
+        player.angle = 70;
         player.tiletype = 0;
         
         player.nextbubble.x = player.x - 2 * level.tilewidth;
         player.nextbubble.y = player.y;
+        player.image = player.x - 2 * level.tilewidth;
         
         // New game
         newGame();
@@ -206,7 +213,7 @@ window.onload = function() {
             context.strokeStyle = "#ff8080";
             context.lineWidth=3;
             context.strokeRect(18.5, 0.5 + canvas.height - 51, canvas.width-37, 32);
-            context.fillStyle = "#ff8080";
+            context.fillStyle = "green";
             context.fillRect(18.5, 0.5 + canvas.height - 51, loadpercentage*(canvas.width-37), 32);
             
             // Draw the progress text
@@ -711,7 +718,7 @@ window.onload = function() {
         var yoffset =  level.tileheight/2;
         
         // Draw level background
-        context.fillStyle = "#8c8c8c";
+        context.fillStyle = "white";
         context.fillRect(level.x - 4, level.y - 4, level.width + 8, level.height + 4 - yoffset);
         
         // Render tiles
@@ -752,7 +759,7 @@ window.onload = function() {
             context.fillStyle = "#ffffff";
             context.font = "24px Verdana";
             drawCenterText("Game Over!", level.x, level.y + level.height / 2 + 10, level.width);
-            drawCenterText("Click to start", level.x, level.y + level.height / 2 + 40, level.width);
+            drawCenterText("Click to try again", level.x, level.y + level.height / 2 + 40, level.width);
         }
     }
     
@@ -764,13 +771,13 @@ window.onload = function() {
         context.fillRect(0, 0, canvas.width, canvas.height);
         
         // Draw header
-        context.fillStyle = "#303030";
+        context.fillStyle = "orange";
         context.fillRect(0, 0, canvas.width, 79);
         
         // Draw title
         context.fillStyle = "#ffffff";
         context.font = "24px Verdana";
-        context.fillText("Break the Cluster", 10, 37);
+        context.fillText("Cluster spreads faster above 5, break them up!", 10, 37);
         
         // Display fps
         context.fillStyle = "#ffffff";
