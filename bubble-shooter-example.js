@@ -26,9 +26,9 @@ window.onload = function() {
     
     // Timing and frames per second
     var lastframe = 0;
-    var fpstime = 0;
+    //var fpstime = 0;
     var framecount = 0;
-    var fps = 0;
+    //var fps = 0;
     
     var initialized = false;
     
@@ -38,12 +38,12 @@ window.onload = function() {
         y: 83,          // Y position
         width: 0,       // Width, gets calculated
         height: 0,      // Height, gets calculated
-        columns: 30,    // Number of tile columns
+        columns: 6,    // Number of tile columns
         rows: 12,       // Number of tile rows
         tilewidth: 40,  // Visual width of a tile
         tileheight: 40, // Visual height of a tile
         rowheight: 40,  // Height of a row
-        radius: 10,     // Bubble collision radius
+        radius: 20,     // Bubble collision radius
         tiles: []       // The two-dimensional tile array
     };
 
@@ -59,7 +59,7 @@ window.onload = function() {
         this.processed = false;
     };
     
-    // Player
+    // Player [class]
     var player = {
         x: 0,
         y: 0,
@@ -86,7 +86,7 @@ window.onload = function() {
                             [[1, 0], [1, 1], [0, 1], [-1, 0], [0, -1], [1, -1]]];  // Odd row tiles
     
     // Number of different colors
-    var bubblecolors = 6;
+    var bubblecolors = 3;
     
     // Game states
     var gamestates = { init: 0, ready: 1, shootbubble: 2, removecluster: 3, gameover: 4 };
@@ -153,7 +153,7 @@ window.onload = function() {
     // Initialize the game
     function init() {
         // Load images
-        images = loadImages(["virus3.png"]);
+        images = loadImages(["/images/virus3.png"]);
         bubbleimage = images[0];
     
         //images = loadImages(["sda.png"]);
@@ -239,7 +239,7 @@ window.onload = function() {
         lastframe = tframe;
         
         // Update the fps counter
-        updateFps(dt);
+        //updateFps(dt);
         
         if (gamestate == gamestates.ready) {
             // Game is ready for player input
@@ -266,7 +266,7 @@ window.onload = function() {
         player.bubble.x += dt * player.bubble.speed * Math.cos(degToRad(player.bubble.angle));
         player.bubble.y += dt * player.bubble.speed * -1*Math.sin(degToRad(player.bubble.angle));
         
-        // Handle left and right collisions with the level
+        //Handle left and right collisions with the level
         if (player.bubble.x <= level.x) {
             // Left edge
             player.bubble.angle = 180 - player.bubble.angle;
@@ -323,8 +323,9 @@ window.onload = function() {
             }
             
             // Add cluster score
-            score += cluster.length * 100;
-            
+           // score += cluster.length * 100;
+            score += 1; //group of cluster caught
+
             // Find floating clusters
             floatingclusters = findFloatingClusters();
             
@@ -337,7 +338,7 @@ window.onload = function() {
                         tile.shift = 1;
                         tile.velocity = player.bubble.dropspeed;
                         
-                        score += 100;
+                        score += 1;
                     }
                 }
             }
@@ -476,7 +477,7 @@ window.onload = function() {
             // Find clusters
             cluster = findCluster(gridpos.x, gridpos.y, true, true, false);
             
-            if (cluster.length >= 3) {
+            if (cluster.length >= 5) {
                 // Remove the cluster
                 setGameState(gamestates.removecluster);
                 return;
@@ -689,20 +690,20 @@ window.onload = function() {
         return neighbors;
     }
     
-    function updateFps(dt) {
-        if (fpstime > 0.25) {
-            // Calculate fps
-            fps = Math.round(framecount / fpstime);
+    // function updateFps(dt) {
+    //     if (fpstime > 0.25) {
+    //         // Calculate fps
+    //         fps = Math.round(framecount / fpstime);
             
-            // Reset time and framecount
-            fpstime = 0;
-            framecount = 0;
-        }
+    //         // Reset time and framecount
+    //         fpstime = 0;
+    //         framecount = 0;
+    //     }
         
-        // Increase time and framecount
-        fpstime += dt;
-        framecount++;
-    }
+    //     // Increase time and framecount
+    //     fpstime += dt;
+    //     framecount++;
+    // }
     
     // Draw text that is centered
     function drawCenterText(text, x, y, width) {
@@ -733,7 +734,7 @@ window.onload = function() {
         context.font = "18px Verdana";
         var scorex = level.x + level.width - 150;
         var scorey = level.y+level.height + level.tileheight - yoffset - 8;
-        drawCenterText("Score:", scorex, scorey, 150);
+        drawCenterText("Cluster Caught:", scorex, scorey, 150);
         context.font = "24px Verdana";
         drawCenterText(score, scorex, scorey+30, 150);
 
@@ -772,17 +773,17 @@ window.onload = function() {
         
         // Draw header
         context.fillStyle = "orange";
-        context.fillRect(0, 0, canvas.width, 79);
+        context.fillRect(0, 0, canvas.width, 50);
         
         // Draw title
         context.fillStyle = "#ffffff";
-        context.font = "24px Verdana";
-        context.fillText("Cluster spreads faster above 5, break them up!", 10, 37);
+        context.font = "20px Verdana";
+        context.fillText("Safe Entry!", 10, 17);
         
-        // Display fps
-        context.fillStyle = "#ffffff";
-        context.font = "12px Verdana";
-        context.fillText("Fps: " + fps, 13, 57);
+    //     // Display fps
+    //     context.fillStyle = "#ffffff";
+    //     context.font = "12px Verdana";
+    //     context.fillText("Fps: " + fps, 13, 37);
     }
     
     // Render tiles
@@ -931,7 +932,7 @@ window.onload = function() {
                         newtile = (newtile + 1) % bubblecolors;
                     }
                     randomtile = newtile;
-                    count = 0;
+                    count = 3;
                 }
                 count++;
                 

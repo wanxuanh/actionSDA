@@ -1,39 +1,20 @@
-// ------------------------------------------------------------------------
-// Bubble Shooter Game Tutorial With HTML5 And JavaScript
-// Copyright (c) 2015 Rembound.com
-// 
-// This program is free software: you can redistribute it and/or modify  
-// it under the terms of the GNU General Public License as published by  
-// the Free Software Foundation, either version 3 of the License, or  
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,  
-// but WITHOUT ANY WARRANTY; without even the implied warranty of  
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the  
-// GNU General Public License for more details.  
-// 
-// You should have received a copy of the GNU General Public License  
-// along with this program.  If not, see http://www.gnu.org/licenses/.
-//
-// http://rembound.com/articles/bubble-shooter-game-tutorial-with-html5-and-javascript
-// ------------------------------------------------------------------------
 
 // The function gets called when the window is fully loaded
 window.onload = function() {
     // Get the canvas and context
-    var canvas = document.getElementById("viewport");
-    var context = canvas.getContext("2d");
-    
+    const canvas = document.getElementById("viewport");
+    const context = canvas.getContext("2d");
+
     // Timing and frames per second
-    var lastframe = 0;
-    //var fpstime = 0;
-    var framecount = 0;
-    //var fps = 0;
+    let lastframe = 0;
+    //let fpstime = 0;
+    let framecount = 0;
+    //let fps = 0;
     
-    var initialized = false;
+    let initialized = false;
     
     // Level
-    var level = {
+    let level = {
         x: 4,           // X position
         y: 83,          // Y position
         width: 0,       // Width, gets calculated
@@ -48,7 +29,7 @@ window.onload = function() {
     };
 
     // Define a tile class
-    var Tile = function(x, y, type, shift) {
+    let Tile = function(x, y, type, shift) {
         this.x = x;
         this.y = y;
         this.type = type;
@@ -60,7 +41,7 @@ window.onload = function() {
     };
     
     // Player [class]
-    var player = {
+    let player = {
         x: 0,
         y: 0,
         angle: 0,
@@ -82,53 +63,53 @@ window.onload = function() {
     };
     
     // Neighbor offset table
-    var neighborsoffsets = [[[1, 0], [0, 1], [-1, 1], [-1, 0], [-1, -1], [0, -1]], // Even row tiles
+    let neighborsoffsets = [[[1, 0], [0, 1], [-1, 1], [-1, 0], [-1, -1], [0, -1]], // Even row tiles
                             [[1, 0], [1, 1], [0, 1], [-1, 0], [0, -1], [1, -1]]];  // Odd row tiles
     
     // Number of different colors
-    var bubblecolors = 3;
+    let bubblecolors = 3;
     
     // Game states
-    var gamestates = { init: 0, ready: 1, shootbubble: 2, removecluster: 3, gameover: 4 };
-    var gamestate = gamestates.init;
+    let gamestates = { init: 0, ready: 1, shootbubble: 2, removecluster: 3, gameover: 4 };
+    let gamestate = gamestates.init;
     
     // Score
-    var score = 0;
+    let score = 0;
     
-    var turncounter = 0;
-    var rowoffset = 0;
+    let turncounter = 0;
+    let rowoffset = 0;
     
-    // Animation variables
-    var animationstate = 0;
-    var animationtime = 0;
+    // Animation letiables
+    let animationstate = 0;
+    let animationtime = 0;
     
     // Clusters
-    var showcluster = false;
-    var cluster = [];
-    var floatingclusters = [];
+    let showcluster = false;
+    let cluster = [];
+    let floatingclusters = [];
     
     // Images
-    var images = [];
-    var bubbleimage;
-    //var playerimage;
+    let images = [];
+    let bubbleimage;
+    //let playerimage;
     
-    // Image loading global variables
-    var loadcount = 0;
-    var loadtotal = 0;
-    var preloaded = false;
+    // Image loading global letiables
+    let loadcount = 0;
+    let loadtotal = 0;
+    let preloaded = false;
     
     // Load images
     function loadImages(imagefiles) {
-        // Initialize variables
+        // Initialize letiables
         loadcount = 0;
         loadtotal = imagefiles.length;
         preloaded = false;
         
         // Load the images
-        var loadedimages = [];
-        for (var i=0; i<imagefiles.length; i++) {
+        let loadedimages = [];
+        for (let i=0; i<imagefiles.length; i++) {
             // Create the image object
-            var image = new Image();
+            let image = new Image();
             
             // Add onload event handler
             image.onload = function () {
@@ -166,9 +147,9 @@ window.onload = function() {
         //Add Keyboard events
         
         // Initialize the two-dimensional tile array
-        for (var i=0; i<level.columns; i++) {
+        for (let i=0; i<level.columns; i++) {
             level.tiles[i] = [];
-            for (var j=0; j<level.rows; j++) {
+            for (let j=0; j<level.rows; j++) {
                 // Define a tile type and a shift parameter for animation
                 level.tiles[i][j] = new Tile(i, j, 0, 0);
             }
@@ -209,7 +190,7 @@ window.onload = function() {
             drawFrame();
             
             // Draw a progress bar
-            var loadpercentage = loadcount/loadtotal;
+            let loadpercentage = loadcount/loadtotal;
             context.strokeStyle = "#ff8080";
             context.lineWidth=3;
             context.strokeRect(18.5, 0.5 + canvas.height - 51, canvas.width-37, 32);
@@ -217,7 +198,7 @@ window.onload = function() {
             context.fillRect(18.5, 0.5 + canvas.height - 51, loadpercentage*(canvas.width-37), 32);
             
             // Draw the progress text
-            var loadtext = "Loaded " + loadcount + "/" + loadtotal + " images";
+            let loadtext = "Loaded " + loadcount + "/" + loadtotal + " images";
             context.fillStyle = "#000000";
             context.font = "16px Verdana";
             context.fillText(loadtext, 18, 0.5 + canvas.height - 63);
@@ -235,7 +216,7 @@ window.onload = function() {
     
     // Update the game state
     function update(tframe) {
-        var dt = (tframe - lastframe) / 1000;
+        let dt = (tframe - lastframe) / 1000;
         lastframe = tframe;
         
         // Update the fps counter
@@ -286,9 +267,9 @@ window.onload = function() {
         }
         
         // Collisions with other tiles
-        for (var i=0; i<level.columns; i++) {
-            for (var j=0; j<level.rows; j++) {
-                var tile = level.tiles[i][j];
+        for (let i=0; i<level.columns; i++) {
+            for (let j=0; j<level.rows; j++) {
+                let tile = level.tiles[i][j];
                 
                 // Skip empty tiles
                 if (tile.type < 0) {
@@ -296,7 +277,7 @@ window.onload = function() {
                 }
                 
                 // Check for intersections
-                var coord = getTileCoordinate(i, j);
+                let coord = getTileCoordinate(i, j);
                 if (circleIntersection(player.bubble.x + level.tilewidth/2,
                                        player.bubble.y + level.tileheight/2,
                                        level.radius,
@@ -317,7 +298,7 @@ window.onload = function() {
             resetRemoved();
             
             // Mark the tiles as removed
-            for (var i=0; i<cluster.length; i++) {
+            for (let i=0; i<cluster.length; i++) {
                 // Set the removed flag
                 cluster[i].removed = true;
             }
@@ -331,9 +312,9 @@ window.onload = function() {
             
             if (floatingclusters.length > 0) {
                 // Setup drop animation
-                for (var i=0; i<floatingclusters.length; i++) {
-                    for (var j=0; j<floatingclusters[i].length; j++) {
-                        var tile = floatingclusters[i][j];
+                for (let i=0; i<floatingclusters.length; i++) {
+                    for (let j=0; j<floatingclusters[i].length; j++) {
+                        let tile = floatingclusters[i][j];
                         tile.shift = 0;
                         tile.shift = 1;
                         tile.velocity = player.bubble.dropspeed;
@@ -348,9 +329,9 @@ window.onload = function() {
         
         if (animationstate == 1) {
             // Pop bubbles
-            var tilesleft = false;
-            for (var i=0; i<cluster.length; i++) {
-                var tile = cluster[i];
+            let tilesleft = false;
+            for (let i=0; i<cluster.length; i++) {
+                let tile = cluster[i];
                 
                 if (tile.type >= 0) {
                     tilesleft = true;
@@ -369,9 +350,9 @@ window.onload = function() {
             }
             
             // Drop bubbles
-            for (var i=0; i<floatingclusters.length; i++) {
-                for (var j=0; j<floatingclusters[i].length; j++) {
-                    var tile = floatingclusters[i][j];
+            for (let i=0; i<floatingclusters.length; i++) {
+                for (let j=0; j<floatingclusters[i].length; j++) {
+                    let tile = floatingclusters[i][j];
                     
                     if (tile.type >= 0) {
                         tilesleft = true;
@@ -402,9 +383,9 @@ window.onload = function() {
                 nextBubble();
                 
                 // Check for game over
-                var tilefound = false
-                for (var i=0; i<level.columns; i++) {
-                    for (var j=0; j<level.rows; j++) {
+                let tilefound = false
+                for (let i=0; i<level.columns; i++) {
+                    for (let j=0; j<level.rows; j++) {
                         if (level.tiles[i][j].type != -1) {
                             tilefound = true;
                             break;
@@ -425,9 +406,9 @@ window.onload = function() {
     // Snap bubble to the grid
     function snapBubble() {
         // Get the grid position
-        var centerx = player.bubble.x + level.tilewidth/2;
-        var centery = player.bubble.y + level.tileheight/2;
-        var gridpos = getGridPosition(centerx, centery);
+        let centerx = player.bubble.x + level.tilewidth/2;
+        let centery = player.bubble.y + level.tileheight/2;
+        let gridpos = getGridPosition(centerx, centery);
 
         // Make sure the grid position is valid
         if (gridpos.x < 0) {
@@ -447,10 +428,10 @@ window.onload = function() {
         }
 
         // Check if the tile is empty
-        var addtile = false;
+        let addtile = false;
         if (level.tiles[gridpos.x][gridpos.y].type != -1) {
             // Tile is not empty, shift the new tile downwards
-            for (var newrow=gridpos.y+1; newrow<level.rows; newrow++) {
+            for (let newrow=gridpos.y+1; newrow<level.rows; newrow++) {
                 if (level.tiles[gridpos.x][newrow].type == -1) {
                     gridpos.y = newrow;
                     addtile = true;
@@ -504,7 +485,7 @@ window.onload = function() {
     
     function checkGameOver() {
         // Check for game over
-        for (var i=0; i<level.columns; i++) {
+        for (let i=0; i<level.columns; i++) {
             // Check if there are bubbles in the bottom row
             if (level.tiles[i][level.rows-1].type != -1) {
                 // Game over
@@ -519,14 +500,14 @@ window.onload = function() {
     
     function addBubbles() {
         // Move the rows downwards
-        for (var i=0; i<level.columns; i++) {
-            for (var j=0; j<level.rows-1; j++) {
+        for (let i=0; i<level.columns; i++) {
+            for (let j=0; j<level.rows-1; j++) {
                 level.tiles[i][level.rows-1-j].type = level.tiles[i][level.rows-1-j-1].type;
             }
         }
         
         // Add a new row of bubbles at the top
-        for (var i=0; i<level.columns; i++) {
+        for (let i=0; i<level.columns; i++) {
             // Add random, existing, colors
             level.tiles[i][0].type = getExistingColor();
         }
@@ -534,16 +515,16 @@ window.onload = function() {
     
     // Find the remaining colors
     function findColors() {
-        var foundcolors = [];
-        var colortable = [];
-        for (var i=0; i<bubblecolors; i++) {
+        let foundcolors = [];
+        let colortable = [];
+        for (let i=0; i<bubblecolors; i++) {
             colortable.push(false);
         }
         
         // Check all tiles
-        for (var i=0; i<level.columns; i++) {
-            for (var j=0; j<level.rows; j++) {
-                var tile = level.tiles[i][j];
+        for (let i=0; i<level.columns; i++) {
+            for (let j=0; j<level.rows; j++) {
+                let tile = level.tiles[i][j];
                 if (tile.type >= 0) {
                     if (!colortable[tile.type]) {
                         colortable[tile.type] = true;
@@ -564,16 +545,16 @@ window.onload = function() {
         }
         
         // Get the target tile. Tile coord must be valid.
-        var targettile = level.tiles[tx][ty];
+        let targettile = level.tiles[tx][ty];
         
         // Initialize the toprocess array with the specified tile
-        var toprocess = [targettile];
+        let toprocess = [targettile];
         targettile.processed = true;
-        var foundcluster = [];
+        let foundcluster = [];
 
         while (toprocess.length > 0) {
             // Pop the last element from the array
-            var currenttile = toprocess.pop();
+            let currenttile = toprocess.pop();
             
             // Skip processed and empty tiles
             if (currenttile.type == -1) {
@@ -591,10 +572,10 @@ window.onload = function() {
                 foundcluster.push(currenttile);
                 
                 // Get the neighbors of the current tile
-                var neighbors = getNeighbors(currenttile);
+                let neighbors = getNeighbors(currenttile);
                 
                 // Check the type of each neighbor
-                for (var i=0; i<neighbors.length; i++) {
+                for (let i=0; i<neighbors.length; i++) {
                     if (!neighbors[i].processed) {
                         // Add the neighbor to the toprocess array
                         toprocess.push(neighbors[i]);
@@ -613,15 +594,15 @@ window.onload = function() {
         // Reset the processed flags
         resetProcessed();
         
-        var foundclusters = [];
+        let foundclusters = [];
         
         // Check all tiles
-        for (var i=0; i<level.columns; i++) {
-            for (var j=0; j<level.rows; j++) {
-                var tile = level.tiles[i][j];
+        for (let i=0; i<level.columns; i++) {
+            for (let j=0; j<level.rows; j++) {
+                let tile = level.tiles[i][j];
                 if (!tile.processed) {
                     // Find all attached tiles
-                    var foundcluster = findCluster(i, j, false, false, true);
+                    let foundcluster = findCluster(i, j, false, false, true);
                     
                     // There must be a tile in the cluster
                     if (foundcluster.length <= 0) {
@@ -629,8 +610,8 @@ window.onload = function() {
                     }
                     
                     // Check if the cluster is floating
-                    var floating = true;
-                    for (var k=0; k<foundcluster.length; k++) {
+                    let floating = true;
+                    for (let k=0; k<foundcluster.length; k++) {
                         if (foundcluster[k].y == 0) {
                             // Tile is attached to the roof
                             floating = false;
@@ -651,8 +632,8 @@ window.onload = function() {
     
     // Reset the processed flags
     function resetProcessed() {
-        for (var i=0; i<level.columns; i++) {
-            for (var j=0; j<level.rows; j++) {
+        for (let i=0; i<level.columns; i++) {
+            for (let j=0; j<level.rows; j++) {
                 level.tiles[i][j].processed = false;
             }
         }
@@ -660,8 +641,8 @@ window.onload = function() {
     
     // Reset the removed flags
     function resetRemoved() {
-        for (var i=0; i<level.columns; i++) {
-            for (var j=0; j<level.rows; j++) {
+        for (let i=0; i<level.columns; i++) {
+            for (let j=0; j<level.rows; j++) {
                 level.tiles[i][j].removed = false;
             }
         }
@@ -669,17 +650,17 @@ window.onload = function() {
     
     // Get the neighbors of the specified tile
     function getNeighbors(tile) {
-        var tilerow = (tile.y + rowoffset) % 2; // Even or odd row
-        var neighbors = [];
+        let tilerow = (tile.y + rowoffset) % 2; // Even or odd row
+        let neighbors = [];
         
         // Get the neighbor offsets for the specified tile
-        var n = neighborsoffsets[tilerow];
+        let n = neighborsoffsets[tilerow];
         
         // Get the neighbors
-        for (var i=0; i<n.length; i++) {
+        for (let i=0; i<n.length; i++) {
             // Neighbor coordinate
-            var nx = tile.x + n[i][0];
-            var ny = tile.y + n[i][1];
+            let nx = tile.x + n[i][0];
+            let ny = tile.y + n[i][1];
             
             // Make sure the tile is valid
             if (nx >= 0 && nx < level.columns && ny >= 0 && ny < level.rows) {
@@ -707,7 +688,7 @@ window.onload = function() {
     
     // Draw text that is centered
     function drawCenterText(text, x, y, width) {
-        var textdim = context.measureText(text);
+        let textdim = context.measureText(text);
         context.fillText(text, x + (width-textdim.width)/2, y);
     }
     
@@ -716,7 +697,7 @@ window.onload = function() {
         // Draw the frame around the game
         drawFrame();
         
-        var yoffset =  level.tileheight/2;
+        let yoffset =  level.tileheight/2;
         
         // Draw level background
         context.fillStyle = "white";
@@ -732,8 +713,8 @@ window.onload = function() {
         // Draw score
         context.fillStyle = "#ffffff";
         context.font = "18px Verdana";
-        var scorex = level.x + level.width - 150;
-        var scorey = level.y+level.height + level.tileheight - yoffset - 8;
+        let scorex = level.x + level.width - 150;
+        let scorey = level.y+level.height + level.tileheight - yoffset - 8;
         drawCenterText("Cluster Caught:", scorex, scorey, 150);
         context.font = "24px Verdana";
         drawCenterText(score, scorex, scorey+30, 150);
@@ -742,8 +723,8 @@ window.onload = function() {
         if (showcluster) {
             renderCluster(cluster, 255, 128, 128);
             
-            for (var i=0; i<floatingclusters.length; i++) {
-                var col = Math.floor(100 + 100 * i / floatingclusters.length);
+            for (let i=0; i<floatingclusters.length; i++) {
+                let col = Math.floor(100 + 100 * i / floatingclusters.length);
                 renderCluster(floatingclusters[i], col, col, col);
             }
         }
@@ -789,16 +770,16 @@ window.onload = function() {
     // Render tiles
     function renderTiles() {
         // Top to bottom
-        for (var j=0; j<level.rows; j++) {
-            for (var i=0; i<level.columns; i++) {
+        for (let j=0; j<level.rows; j++) {
+            for (let i=0; i<level.columns; i++) {
                 // Get the tile
-                var tile = level.tiles[i][j];
+                let tile = level.tiles[i][j];
             
                 // Get the shift of the tile for animation
-                var shift = tile.shift;
+                let shift = tile.shift;
                 
                 // Calculate the tile coordinates
-                var coord = getTileCoordinate(i, j);
+                let coord = getTileCoordinate(i, j);
                 
                 // Check if there is a tile present
                 if (tile.type >= 0) {
@@ -817,9 +798,9 @@ window.onload = function() {
     
     // Render cluster
     function renderCluster(cluster, r, g, b) {
-        for (var i=0; i<cluster.length; i++) {
+        for (let i=0; i<cluster.length; i++) {
             // Calculate the tile coordinates
-            var coord = getTileCoordinate(cluster[i].x, cluster[i].y);
+            let coord = getTileCoordinate(cluster[i].x, cluster[i].y);
             
             // Draw the tile using the color
             context.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
@@ -829,8 +810,8 @@ window.onload = function() {
     
     // Render the player bubble
     function renderPlayer() {
-        var centerx = player.x + level.tilewidth/2;
-        var centery = player.y + level.tileheight/2;
+        let centerx = player.x + level.tilewidth/2;
+        let centery = player.y + level.tileheight/2;
         
         // Draw player background circle
     
@@ -862,27 +843,27 @@ window.onload = function() {
     
     // Get the tile coordinate
     function getTileCoordinate(column, row) {
-        var tilex = level.x + column * level.tilewidth;
+        let tilex = level.x + column * level.tilewidth;
         
         // X offset for odd or even rows
         if ((row + rowoffset) % 2) {
             tilex += level.tilewidth/2;
         }
         
-        var tiley = level.y + row * level.rowheight;
+        let tiley = level.y + row * level.rowheight;
         return { tilex: tilex, tiley: tiley };
     }
     
     // Get the closest grid position
     function getGridPosition(x, y) {
-        var gridy = Math.floor((y - level.y) / level.rowheight);
+        let gridy = Math.floor((y - level.y) / level.rowheight);
         
         // Check for offset
-        var xoffset = 0;
+        let xoffset = 0;
         if ((gridy + rowoffset) % 2) {
             xoffset = level.tilewidth / 2;
         }
-        var gridx = Math.floor(((x - xoffset) - level.x) / level.tilewidth);
+        let gridx = Math.floor(((x - xoffset) - level.x) / level.tilewidth);
         
         return { x: gridx, y: gridy };
     }
@@ -919,13 +900,13 @@ window.onload = function() {
     // Create a random level
     function createLevel() {
         // Create a level with random tiles
-        for (var j=0; j<level.rows; j++) {
-            var randomtile = randRange(0, bubblecolors-1);
-            var count = 0;
-            for (var i=0; i<level.columns; i++) {
+        for (let j=0; j<level.rows; j++) {
+            let randomtile = randRange(0, bubblecolors-1);
+            let count = 0;
+            for (let i=0; i<level.columns; i++) {
                 if (count >= 2) {
                     // Change the random tile
-                    var newtile = randRange(0, bubblecolors-1);
+                    let newtile = randRange(0, bubblecolors-1);
                     
                     // Make sure the new tile is different from the previous tile
                     if (newtile == randomtile) {
@@ -955,7 +936,7 @@ window.onload = function() {
         player.bubble.visible = true;
         
         // Get a random type from the existing colors
-        var nextcolor = getExistingColor();
+        let nextcolor = getExistingColor();
         
         // Set the next bubble
         player.nextbubble.tiletype = nextcolor;
@@ -965,7 +946,7 @@ window.onload = function() {
     function getExistingColor() {
         existingcolors = findColors();
         
-        var bubbletype = 0;
+        let bubbletype = 0;
         if (existingcolors.length > 0) {
             bubbletype = existingcolors[randRange(0, existingcolors.length-1)];
         }
@@ -993,9 +974,9 @@ window.onload = function() {
     // Check if two circles intersect
     function circleIntersection(x1, y1, r1, x2, y2, r2) {
         // Calculate the distance between the centers
-        var dx = x1 - x2;
-        var dy = y1 - y2;
-        var len = Math.sqrt(dx * dx + dy * dy);
+        let dx = x1 - x2;
+        let dy = y1 - y2;
+        let len = Math.sqrt(dx * dx + dy * dy);
         
         if (len < r1 + r2) {
             // Circles intersect
@@ -1018,10 +999,10 @@ window.onload = function() {
     // On mouse movement
     function onMouseMove(e) {
         // Get the mouse position
-        var pos = getMousePos(canvas, e);
+        let pos = getMousePos(canvas, e);
 
         // Get the mouse angle
-        var mouseangle = radToDeg(Math.atan2((player.y+level.tileheight/2) - pos.y, pos.x - (player.x+level.tilewidth/2)));
+        let mouseangle = radToDeg(Math.atan2((player.y+level.tileheight/2) - pos.y, pos.x - (player.x+level.tilewidth/2)));
 
         // Convert range to 0, 360 degrees
         if (mouseangle < 0) {
@@ -1029,8 +1010,8 @@ window.onload = function() {
         }
 
         // Restrict angle to 8, 172 degrees
-        var lbound = 8;
-        var ubound = 172;
+        let lbound = 8;
+        let ubound = 172;
         if (mouseangle > 90 && mouseangle < 270) {
             // Left
             if (mouseangle > ubound) {
@@ -1050,7 +1031,7 @@ window.onload = function() {
     // On mouse button click
     function onMouseDown(e) {
         // Get the mouse position
-        var pos = getMousePos(canvas, e);
+        let pos = getMousePos(canvas, e);
         
         if (gamestate == gamestates.ready) {
             shootBubble();
@@ -1061,7 +1042,7 @@ window.onload = function() {
     
     // Get the mouse position
     function getMousePos(canvas, e) {
-        var rect = canvas.getBoundingClientRect();
+        let rect = canvas.getBoundingClientRect();
         return {
             x: Math.round((e.clientX - rect.left)/(rect.right - rect.left)*canvas.width),
             y: Math.round((e.clientY - rect.top)/(rect.bottom - rect.top)*canvas.height)
