@@ -153,7 +153,7 @@ window.onload = function() {
     // Initialize the game
     function init() {
         // Load images
-        images = loadImages(["virus3.png"]);
+        images = loadImages(["/images/virus3.png"]);
         bubbleimage = images[0];
     
         //images = loadImages(["sda.png"]);
