@@ -3,16 +3,17 @@
 body {
     width: 100%;
     height: 300px;
-    /* background-image: url('socialdistance.jpg'); */
+    background-image: url('button.jpg'); 
     background-color: red;
     background-size: cover;
     /*border: 4px solid #e3985a;*/
     background-repeat: no-repeat;
+    text-align: center;
     
 }
 h1 {
     font-family: 'Press Start 2P', cursive;
-    color: white; /*#880808*/
+    color: red; /*#880808*/
     font-size: 50px;
 }
 button {

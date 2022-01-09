@@ -43,7 +43,7 @@ window.onload = function() {
         tilewidth: 40,  // Visual width of a tile
         tileheight: 40, // Visual height of a tile
         rowheight: 40,  // Height of a row
-        radius: 20,     // Bubble collision radius
+        radius: 10,     // Bubble collision radius
         tiles: []       // The two-dimensional tile array
     };
 

@@ -1,4 +1,3 @@
-
 // ------------------------------------------------------------------------
 // Bubble Shooter Game Tutorial With HTML5 And JavaScript
 // Copyright (c) 2015 Rembound.com
@@ -27,9 +26,9 @@ window.onload = function() {
     
     // Timing and frames per second
     var lastframe = 0;
-    var fpstime = 0;
+    //var fpstime = 0;
     var framecount = 0;
-    var fps = 0;
+    //var fps = 0;
     
     var initialized = false;
     
@@ -39,11 +38,11 @@ window.onload = function() {
         y: 83,          // Y position
         width: 0,       // Width, gets calculated
         height: 0,      // Height, gets calculated
-        columns: 15,    // Number of tile columns
-        rows: 14,       // Number of tile rows
+        columns: 6,    // Number of tile columns
+        rows: 12,       // Number of tile rows
         tilewidth: 40,  // Visual width of a tile
         tileheight: 40, // Visual height of a tile
-        rowheight: 34,  // Height of a row
+        rowheight: 40,  // Height of a row
         radius: 20,     // Bubble collision radius
         tiles: []       // The two-dimensional tile array
     };
@@ -60,7 +59,7 @@ window.onload = function() {
         this.processed = false;
     };
     
-    // Player
+    // Player [class]
     var player = {
         x: 0,
         y: 0,
@@ -70,7 +69,7 @@ window.onload = function() {
                     x: 0,
                     y: 0,
                     angle: 0,
-                    speed: 1000,
+                    speed: 500,
                     dropspeed: 900,
                     tiletype: 0,
                     visible: false
@@ -87,7 +86,7 @@ window.onload = function() {
                             [[1, 0], [1, 1], [0, 1], [-1, 0], [0, -1], [1, -1]]];  // Odd row tiles
     
     // Number of different colors
-    var bubblecolors = 7;
+    var bubblecolors = 3;
     
     // Game states
     var gamestates = { init: 0, ready: 1, shootbubble: 2, removecluster: 3, gameover: 4 };
@@ -111,6 +110,7 @@ window.onload = function() {
     // Images
     var images = [];
     var bubbleimage;
+    //var playerimage;
     
     // Image loading global variables
     var loadcount = 0;
@@ -153,12 +153,17 @@ window.onload = function() {
     // Initialize the game
     function init() {
         // Load images
-        images = loadImages(["bubble-sprites.png"]);
+        images = loadImages(["virus3.png"]);
         bubbleimage = images[0];
+    
+        //images = loadImages(["sda.png"]);
+        //playerimage = images[1];
     
         // Add mouse events
         canvas.addEventListener("mousemove", onMouseMove);
         canvas.addEventListener("mousedown", onMouseDown);
+
+        //Add Keyboard events
         
         // Initialize the two-dimensional tile array
         for (var i=0; i<level.columns; i++) {
@@ -175,11 +180,12 @@ window.onload = function() {
         // Init the player
         player.x = level.x + level.width/2 - level.tilewidth/2;
         player.y = level.y + level.height;
-        player.angle = 90;
+        player.angle = 70;
         player.tiletype = 0;
         
         player.nextbubble.x = player.x - 2 * level.tilewidth;
         player.nextbubble.y = player.y;
+        player.image = player.x - 2 * level.tilewidth;
         
         // New game
         newGame();
@@ -207,11 +213,11 @@ window.onload = function() {
             context.strokeStyle = "#ff8080";
             context.lineWidth=3;
             context.strokeRect(18.5, 0.5 + canvas.height - 51, canvas.width-37, 32);
-            context.fillStyle = "#ff8080";
+            context.fillStyle = "green";
             context.fillRect(18.5, 0.5 + canvas.height - 51, loadpercentage*(canvas.width-37), 32);
             
             // Draw the progress text
-            var loadtext = "Loading " + loadcount + "/" + loadtotal + " ...";
+            var loadtext = "Loaded " + loadcount + "/" + loadtotal + " images";
             context.fillStyle = "#000000";
             context.font = "16px Verdana";
             context.fillText(loadtext, 18, 0.5 + canvas.height - 63);
@@ -233,7 +239,7 @@ window.onload = function() {
         lastframe = tframe;
         
         // Update the fps counter
-        updateFps(dt);
+        //updateFps(dt);
         
         if (gamestate == gamestates.ready) {
             // Game is ready for player input
@@ -260,7 +266,7 @@ window.onload = function() {
         player.bubble.x += dt * player.bubble.speed * Math.cos(degToRad(player.bubble.angle));
         player.bubble.y += dt * player.bubble.speed * -1*Math.sin(degToRad(player.bubble.angle));
         
-        // Handle left and right collisions with the level
+        //Handle left and right collisions with the level
         if (player.bubble.x <= level.x) {
             // Left edge
             player.bubble.angle = 180 - player.bubble.angle;
@@ -317,8 +323,9 @@ window.onload = function() {
             }
             
             // Add cluster score
-            score += cluster.length * 100;
-            
+           // score += cluster.length * 100;
+            score += 1; //group of cluster caught
+
             // Find floating clusters
             floatingclusters = findFloatingClusters();
             
@@ -331,7 +338,7 @@ window.onload = function() {
                         tile.shift = 1;
                         tile.velocity = player.bubble.dropspeed;
                         
-                        score += 100;
+                        score += 1;
                     }
                 }
             }
@@ -470,7 +477,7 @@ window.onload = function() {
             // Find clusters
             cluster = findCluster(gridpos.x, gridpos.y, true, true, false);
             
-            if (cluster.length >= 3) {
+            if (cluster.length >= 5) {
                 // Remove the cluster
                 setGameState(gamestates.removecluster);
                 return;
@@ -683,20 +690,20 @@ window.onload = function() {
         return neighbors;
     }
     
-    function updateFps(dt) {
-        if (fpstime > 0.25) {
-            // Calculate fps
-            fps = Math.round(framecount / fpstime);
+    // function updateFps(dt) {
+    //     if (fpstime > 0.25) {
+    //         // Calculate fps
+    //         fps = Math.round(framecount / fpstime);
             
-            // Reset time and framecount
-            fpstime = 0;
-            framecount = 0;
-        }
+    //         // Reset time and framecount
+    //         fpstime = 0;
+    //         framecount = 0;
+    //     }
         
-        // Increase time and framecount
-        fpstime += dt;
-        framecount++;
-    }
+    //     // Increase time and framecount
+    //     fpstime += dt;
+    //     framecount++;
+    // }
     
     // Draw text that is centered
     function drawCenterText(text, x, y, width) {
@@ -712,7 +719,7 @@ window.onload = function() {
         var yoffset =  level.tileheight/2;
         
         // Draw level background
-        context.fillStyle = "#8c8c8c";
+        context.fillStyle = "white";
         context.fillRect(level.x - 4, level.y - 4, level.width + 8, level.height + 4 - yoffset);
         
         // Render tiles
@@ -727,7 +734,7 @@ window.onload = function() {
         context.font = "18px Verdana";
         var scorex = level.x + level.width - 150;
         var scorey = level.y+level.height + level.tileheight - yoffset - 8;
-        drawCenterText("Score:", scorex, scorey, 150);
+        drawCenterText("Cluster Caught:", scorex, scorey, 150);
         context.font = "24px Verdana";
         drawCenterText(score, scorex, scorey+30, 150);
 
@@ -753,30 +760,30 @@ window.onload = function() {
             context.fillStyle = "#ffffff";
             context.font = "24px Verdana";
             drawCenterText("Game Over!", level.x, level.y + level.height / 2 + 10, level.width);
-            drawCenterText("Click to start", level.x, level.y + level.height / 2 + 40, level.width);
+            drawCenterText("Click to try again", level.x, level.y + level.height / 2 + 40, level.width);
         }
     }
     
     // Draw a frame around the game
     function drawFrame() {
         // Draw background
+        
         context.fillStyle = "#e8eaec";
         context.fillRect(0, 0, canvas.width, canvas.height);
-        context.drawImage(image: "socialdistance.jpg", dx: canvas.width, dy: canvas.height);
-
+        
         // Draw header
-        context.fillStyle = "#303030";
-        context.fillRect(0, 0, canvas.width, 79);
+        context.fillStyle = "orange";
+        context.fillRect(0, 0, canvas.width, 50);
         
         // Draw title
         context.fillStyle = "#ffffff";
-        context.font = "24px Verdana";
-        context.fillText("Bubble Shooter Example - Rembound.com", 10, 37);
+        context.font = "20px Verdana";
+        context.fillText("Safe Entry!", 10, 17);
         
-        // Display fps
-        context.fillStyle = "#ffffff";
-        context.font = "12px Verdana";
-        context.fillText("Fps: " + fps, 13, 57);
+    //     // Display fps
+    //     context.fillStyle = "#ffffff";
+    //     context.font = "12px Verdana";
+    //     context.fillText("Fps: " + fps, 13, 37);
     }
     
     // Render tiles
@@ -826,12 +833,13 @@ window.onload = function() {
         var centery = player.y + level.tileheight/2;
         
         // Draw player background circle
+    
         context.fillStyle = "#7a7a7a";
         context.beginPath();
         context.arc(centerx, centery, level.radius+12, 0, 2*Math.PI, false);
         context.fill();
         context.lineWidth = 2;
-        context.strokeStyle = "#8c8c8c";
+        context.strokeStyle = "black";//"#8c8c8c";
         context.stroke();
 
         // Draw the angle
@@ -924,7 +932,7 @@ window.onload = function() {
                         newtile = (newtile + 1) % bubblecolors;
                     }
                     randomtile = newtile;
-                    count = 0;
+                    count = 3;
                 }
                 count++;
                 
