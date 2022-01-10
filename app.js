@@ -1,40 +1,67 @@
-function stopBallIfOutOfBounds() {
-    const $ball = $('#ball');
-    const $field = $('#field');
-    const fieldHeight = $field.height();
-    const fieldWidth = $field.width();
-    const { left: fieldLeft, top: fieldTop } = $field.offset();
-    const { left, top } = $ball.position();
-  
-    const ballSize = 40;
-    if (top < fieldTop) {
-      $ball.css('top', 0);
-    }
-    if (left < fieldLeft) {
-      $ball.css('left', 0);
-    }
-    if (left > fieldWidth + fieldLeft - ballSize) {
-      $ball.css('left', fieldWidth - ballSize);
-    }
-    if (top > fieldHeight + fieldTop - ballSize) {
-      $ball.css('top', fieldHeight - ballSize);
-    }
-  }
-  
-  function moveBall(x, y) {
-    const $ball = $('#ball');
-    $ball.css('left', `+=${x}`);
-    $ball.css('top', `+=${y}`);
-    stopBallIfOutOfBounds();
-  }
-  
-  $(() => {
-    $('body').keydown(function (e) {
-      switch (e.keyCode) {
-        case 37: moveBall(-10, 0); break;
-        case 38: moveBall(0, -10); break;
-        case 39: moveBall(10, 0); break;
-        case 40: moveBall(0, 10); break;
+const canvas = document.querySelector("canvas")
+const c = canvas.getContext('2d')
+canvas.width = innerWidth
+canvas.height = innerHeight
+
+    class Player {
+      constructor(x,y,radius,color){
+        this.x = x
+        this.y = y
+        this.radius = radius
+        this.color = color
       }
-    });
-  });
+      draw(){
+        c.beginPath()
+        c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false)
+        c.fillStyle = this.color
+        c.fill()
+      }
+    }
+
+    class Projectile{
+      constructor(x,y,radius,color,velocity){
+        this.x = x
+        this.y = y
+        this.radius = radius
+        this.color = color
+        this.velocity = velocity
+      }
+      draw(){
+        c.beginPath()
+        c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false)
+        c.fillStyle = this.color
+        c.fill()
+      }
+      update(){
+        this.x = this.x + this.velocity.x
+        this.y = this.y + this.velocity.y
+      }
+    }
+    const x = canvas.width /2
+    const y = canvas.height /2
+
+    const player = new Player(x,y,30,'blue')
+    player.draw()
+
+    const projectile = new Projectile(
+      canvas.width /2,
+      canvas.height/2,
+      5,
+      'red',
+      { x: 1,
+        y: 1
+      }
+    )
+
+    function animate(){
+      requestAnimationFrame(animate)
+      console.log('go')
+      projectile.draw()
+      projectile.update()
+    }
+
+//On click
+addEventListener('click',(event) => {})
+
+    animate()
+    console.log('go')

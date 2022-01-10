@@ -8,10 +8,10 @@ h1 {
 }
 
 body {
-    background-color: grey;
+    background:linear-gradient(0deg,rgba(34,193,194,1)0%,rgba(253,187,45,1)100%);
   }
   
-  #field {
+  #gameboard {
     background-color: white;
     height: 450px;
     width: 90%;
@@ -20,7 +20,7 @@ body {
     border-color: indianred;
   }
   
-  #ball {
+  #player {
     background-color: greenyellow;
     height: 40px;
     width: 40px;
