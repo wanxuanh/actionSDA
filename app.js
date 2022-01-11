@@ -70,7 +70,8 @@ canvas.height = innerHeight
 
     function spawnEnemies(){
       setInterval(() => {
-        const radius = Math.random() * (30 - 4) + 4 //play with the size of enemies (range from 5 - 30)
+        //const radius = Math.random() * (30 - 4) + 4 //play with the size of enemies (range from 5 - 30)
+        const radius = 30
 
         let x
         let y //let it not be a const
@@ -95,7 +96,7 @@ canvas.height = innerHeight
           y: Math.sin(angle)
         }
         enemies.push(new Enemy(x,y,radius,color,velocity))
-      },1000)
+     },1000)
     }
 
     function animate(){
@@ -107,12 +108,30 @@ canvas.height = innerHeight
       projectile.update()
       })
 
-      enemies.forEach((enemy) => {
+      enemies.forEach((enemy,index) => {
         enemy.update()
+
+        //CHECK FOR COLLISION
+        projectiles.forEach((projectile, projectileIndex)=>{ 
+          const dist = Math.hypot(projectile.x - enemy.x, 
+            projectile.y - enemy.y)
+
+            //console.log(dist)
+
+            if(dist - enemy.radius - projectile.radius < 1)
+            {
+              setTimeout(() => {
+              //remove enemies once collide
+              enemies.splice(index,1)
+              projectiles.splice(projectileIndex, 1)
+              //console.log('remove from screen')
+            }, 0)
+          }
+        })
     })
   }
 
-//On click
+//On click SHOOT
 addEventListener('click',(event) => {
   const angle = Math.atan2( //angle based on x and y
     event.clientY - canvas.height / 2, event.clientX - canvas.width /2
@@ -129,7 +148,7 @@ addEventListener('click',(event) => {
 
   projectiles.push(
     new Projectile(canvas.width/2,
-      canvas.height / 2, 5, 'red', velocity)
+      canvas.height / 2, 10, 'red', velocity)
   )
 })
 
