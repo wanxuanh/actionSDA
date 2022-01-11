@@ -2,6 +2,8 @@
 <html>
 <body>
 
+  # Game Storyline
+    
 Project #1: Action, SDA!
 
     Built with HTML, CSS and JavaScript (jQuery is strongly optional)
@@ -15,12 +17,18 @@ Project #1: Action, SDA!
 
 
   # Project Timeline
-    Week 1 (Ideation): Defining Game play, look for images, research what logic/calculation for the game
-    Week 2:(Action): Understanding the calculation, logic while starting up the game board afresh
-    Week 3:
-    Week 4:
+    Week 1 | (Ideation) :  Defining Game play, look for images, research what logic/calculation for the game
+    Week 2 |  (Action)  :  Understanding the calculation, logic while starting up the game board afresh,
+                           Game Player and Enemies up, with shooter. Check for collision. 
+    Week 3 |
+    Week 4 |
 
   # Technologies used
+    
+    Function
+    Class
+    Array
+    Call-back Function
     
    Approach taken
     
@@ -37,9 +45,10 @@ Project #1: Action, SDA!
   <h3> please come back later.. </h3>
 
 
-# References
+# Reference
 https://github.com/rembound/Bubble-Shooter-HTML5
-
+https://www.youtube.com/watch?v=eI9idPTT0c4
+    
 </body>
 </html>
 
