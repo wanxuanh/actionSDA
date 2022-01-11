@@ -20,8 +20,8 @@ Project #1: Action, SDA!
     Week 1 | (Ideation) :  Defining Game play, look for images, research what logic/calculation for the game
     Week 2 |  (Action)  :  Understanding the calculation, logic while starting up the game board afresh,
                            Game Player and Enemies up, with shooter. Check for collision. 
-    Week 3 |
-    Week 4 |
+    Week 3 | (Progress)
+    Week 4 | (Touch-up)
 
   # Technologies used
     
