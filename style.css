@@ -1,8 +1,8 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 h1 {
     font-family: 'Press Start 2P', cursive;
-    color: red; /*#880808*/
+    color: red; 
     font-size: 50px;
     text-align: center;
 }
@@ -10,7 +10,13 @@ h1 {
 /* body {
     background:linear-gradient(0deg,rgba(34,193,194,1)0%,rgba(253,187,45,1)100%);
   } */
-  
+  .score{
+    color: brown;
+    font-size: 20px;
+    margin: 20px;
+    position: absolute
+    }
+    
   #gameboard {
     background-color: white;
     height: 450px;
@@ -28,4 +34,46 @@ h1 {
     position: relative;
     left: 50%;
     top: 50%;
-  } */
+  }
+
+
+  #modaelEl{
+    margin: auto;
+    text-align: center;
+    background-color: skyblue;
+    color: black;
+    border-radius: 5px;
+    font-size: 200px;
+    height: 200px;
+    width: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: 50%;
+    transform: translate(-50%, -50%);     
+
+  }
+
+  #startGame{
+    background-color: orange;
+    color: black;
+    border: darkblue;
+    border-radius: 30px;
+    font-size: 25px;
+    padding: 15px 150px;
+    margin: auto;
+    text-align: center;
+    background-color: skyblue;
+    border-radius: 5px;
+    height: 200px;
+    width: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: 50%;
+    transform: translate(-50%, -50%);     
+    }
+  
+    h2{
+      font-size: x-small;
+    }

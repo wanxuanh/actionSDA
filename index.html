@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <title>Action, SDA</title>
   <link rel="stylesheet" href="style.css" />
@@ -9,7 +8,19 @@
 
 <body>
     <h1> Action, SDA! </h1>
-  <canvas id ="canvas"></canvas>
+    <div class="score">
+      <span>Score: </span>
+      <span id ="scoreEl">0</span>
+    </div>
+      <div id ="modaelEl">
+        <div>
+          <h2 id="bigScoreEl">Game Over! Score: 0</h2>
+        <button id= "startGame">Start Game</button>
+        </div>
+      </div>
+    <canvas id ="canvas"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js" integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
   <script src="app.js"></script>
 
 </body>
