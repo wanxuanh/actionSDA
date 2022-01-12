@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 h1 {
     font-family: 'Press Start 2P', cursive;
@@ -7,9 +7,9 @@ h1 {
     text-align: center;
 }
 
-body {
+/* body {
     background:linear-gradient(0deg,rgba(34,193,194,1)0%,rgba(253,187,45,1)100%);
-  }
+  } */
   
   #gameboard {
     background-color: white;
@@ -28,4 +28,4 @@ body {
     position: relative;
     left: 50%;
     top: 50%;
-  }
+  } */
