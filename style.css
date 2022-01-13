@@ -1,14 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
+
 h1 {
     font-family: 'Press Start 2P', cursive;
     color: red; 
     font-size: 50px;
     text-align: center;
 }
+p{
+  text-align: center;
+  font-size: small;
+  background-color: white;
+  width: 350px;
+  position: absolute;
+  top: 15%;
+  left: 40%;
+  border-radius: 5px;
+  border-style: dotted;
+  padding: 15px;
+
+}
 
 body {
-    background:linear-gradient(0deg,rgba(34,193,194,1)0%,rgba(253,187,45,1)100%);
+
+  background-image: url('images/shoppingc.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  /* background:linear-gradient(0deg,rgba(34,193,194,1)0%,rgba(253,187,45,1)100%);*/
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
@@ -45,25 +64,50 @@ body {
     top: 50%;
   }
 
-
+/*Menu*/
   #modaelEl{
+   
+   background:linear-gradient(0deg,rgba(34,193,194,1)0%,rgba(253,187,45,1)100%);
+ 
+    /* background-image: url('images/sda-menu.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center; */
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    height: 200px;
+    width: 100%;
+    position: absolute;
+    border-style: hidden;
+    top:50%;
+    left:50%;
+
+    transform: translate(-50%, -50%);     
+
+  }
+
+  #bigScoreEl{
     margin: auto;
     text-align: center;
-    background-color: skyblue;
-    color: black;
+    background-color: red;
+    color: blue;
     border-radius: 5px;
-    font-size: 200px;
-    height: 200px;
-    width: 400px;
+    font-size: 30px;
+    height: 0px;
+    width: 0px;
     position: absolute;
-    top: 50%;
+    border-radius: 5px;
+    border-style: hidden;
+    top: 30%;
     left: 50%;
     margin-right: 50%;
     transform: translate(-50%, -50%);     
 
   }
 
-  #startGame{
+  /*button*/
+  #startGame{ 
     background-color: orange;
     color: black;
     border: darkblue;
@@ -73,13 +117,14 @@ body {
     margin: auto;
     text-align: center;
     background-color: skyblue;
-    border-radius: 5px;
-    height: 200px;
+    border-style: outset;
+    height: 100px;
     width: 400px;
     position: absolute;
     top: 50%;
     left: 50%;
     margin-right: 50%;
+
     transform: translate(-50%, -50%);     
     }
   
