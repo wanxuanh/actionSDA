@@ -2,9 +2,9 @@
 <html>
 <body>
 
-  # Game Storyline
+  # Project 1 - My First Game Requirements
     
-Project #1: Action, SDA!
+Project #1: - Action, SDA!
 
     Built with HTML, CSS and JavaScript (jQuery is strongly optional)
     Use Javascript for DOM manipulation
@@ -15,7 +15,11 @@ Project #1: Action, SDA!
     Be displayed in the browser
     Have some kind of user interaction via mouseclick or keypress
 
+  # Game Storyline
 
+  
+  Originated from the idea of playing Bubble Shooter.
+  
   # Project Timeline
   <h3>Week 1 | (Ideation) :   [27 Dec - 02 Jan] </h3>
   
