@@ -3,7 +3,7 @@
 
 h1 {
     font-family: 'Press Start 2P', cursive;
-    color: black; 
+    color: red; 
     font-size: 50px;
     text-align: center;
     width: 600px;
@@ -11,7 +11,7 @@ h1 {
     top: 0%;
     left: 35%;
     position: relative;
-    background:linear-gradient(0deg,rgba(34,193,194,1)0%,rgba(253,187,45,1)100%);
+    /*background:linear-gradient(0deg,rgb(194, 34, 141)0%,rgba(253,187,45,1)100%);*/
 
 }
 p{
@@ -29,7 +29,6 @@ p{
 }
 
 body {
-
   background-image: url('images/shoppingc.png');
   background-repeat: no-repeat;
   background-size: cover;
@@ -64,7 +63,8 @@ body {
   }
   
   #player {
-    background-image: url('images/sda-pout.png');
+    background-color: black;
+  /*  background-image: url('images/sda-pout.png');*/
     height: 40px;
     width: 40px;
     border-radius: 50%;

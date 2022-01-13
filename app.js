@@ -129,10 +129,10 @@ let x = canvas.width / 2
 let y = canvas.height / 2
 
 let images = []
-let player = new Player(x, y, 15, 'black')
+let player = new Player(950, 100, 100, 'transparent')
 
-const playerSprite = new Image()
-playerSprite.src = 'images/sda-pout.png'
+const playerImage = new Image()
+playerImage.src = 'images/guard.jpg'
 
 let projectiles = [] //array to loop in animate (management of instances of multiple)
 let enemies = []
@@ -144,7 +144,7 @@ let particles = []
 
 function init() {
   image = []
-  player = new Player(x, y, 10, 'black')
+  //player = new Player(300, y, 30, 'black')
   projectiles = [] //array to loop in animate (management of instances of multiple)
   enemies = []
   particles = []
@@ -176,9 +176,10 @@ function spawnEnemies() {
     }
     let color = `hsl(${Math.random() * 360},50%,50%)`
 
+    //angle where the enemy spawn towards
     const angle = Math.atan2(
-      canvas.height / 2 - y,
-      canvas.width / 2
+      50 - canvas.height,
+      canvas.width
     )
     // const angle = Math.atan2( //angle based on x and y
     //   canvas.height / 2 - y, canvas.width / 2 - x
@@ -190,7 +191,7 @@ function spawnEnemies() {
       y: Math.sin(angle)
     }
     enemies.push(new Enemy(x, y, radius, color, velocity))
-  }, 1000)
+  }, 400)
 }
 
 // function SpawnEnemies(){
@@ -212,13 +213,24 @@ function spawnEnemies() {
 //       },1000)
 
 // }
+
+// function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH) {
+//   ctx.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH)
+// }
+
 let animationId
 let score = 0
 
+//********************************************************
+//ANIMATE
+//********************************************************
+
 function animate() {
   animationId = requestAnimationFrame(animate)
-  c.fillstyle = 'orange'
+  //c.fillstyle = 'orange'
   c.clearRect(0, 0, canvas.width, canvas.height)
+  //c.drawImage(playerImage, this.x, this.y, this.size, this.size))
+  c.drawImage(playerImage, 50,100,630,650,800,-100,260,280)// sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight
   player.draw() //draw in the animate as calling outside will disappear
   //console.log('go')
   particles.forEach((particle, index) => {
@@ -319,7 +331,7 @@ function animate() {
 addEventListener('click', (event) => {
   //console.log(projectiles)
   const angle = Math.atan2( //angle based on x and y
-    event.clientY - canvas.height / 2, event.clientX - canvas.width / 2
+    event.clientY - canvas.height /2, event.clientX - canvas.width / 2
   ) //displays radian
 
   // console.log(angle)
@@ -328,15 +340,16 @@ addEventListener('click', (event) => {
 
   //change the speed
   const velocity = {
-    x: Math.cos(angle) * 4,
-    y: Math.sin(angle) * 4
+    x: Math.cos(angle) * 15,
+    y: Math.sin(angle) * 15
   }
 
   projectiles.push(
     new Projectile(canvas.width / 2,
-      canvas.height / 2, 2, 'black', velocity)
+      canvas.height / 10, 4, 'yellowgreen', velocity)
   )
 })
+
 
 startGame.addEventListener('click', () => {
   init()
@@ -345,6 +358,9 @@ startGame.addEventListener('click', () => {
 
   //scoreEl.style.display = "none"
   modaelEl.style.display = "none"
+
+  addEventListener("mousemove", onMouseMove);
+  addEventListener("mousedown", onMouseDown);
   //bigScoreEl.style.display = "none"
 })
     //console.log('go')
