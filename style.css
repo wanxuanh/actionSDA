@@ -25,7 +25,7 @@ body {
 
   background-image: url('images/shoppingc.png');
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   /* background:linear-gradient(0deg,rgba(34,193,194,1)0%,rgba(253,187,45,1)100%);*/
     -webkit-user-select: none; /* Safari */
