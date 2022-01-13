@@ -3,21 +3,28 @@
 
 h1 {
     font-family: 'Press Start 2P', cursive;
-    color: red; 
+    color: black; 
     font-size: 50px;
     text-align: center;
+    width: 600px;
+    height: 80px;
+    top: 0%;
+    left: 35%;
+    position: relative;
+    background:linear-gradient(0deg,rgba(34,193,194,1)0%,rgba(253,187,45,1)100%);
+
 }
 p{
   text-align: center;
   font-size: small;
   background-color: white;
   width: 350px;
-  position: absolute;
   top: 15%;
   left: 40%;
   border-radius: 5px;
   border-style: dotted;
   padding: 15px;
+  position: relative;
 
 }
 
@@ -31,6 +38,7 @@ body {
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
+    cursor:crosshair;
   }
 
 #canvas{
@@ -39,10 +47,11 @@ body {
   border:darkblue;
 }
   .score{
-    color: brown;
+    color: white;
     font-size: 20px;
     margin: 20px;
-    position: absolute
+    position: absolute;
+    background-color: brown;
     }
     
   #gameboard {
@@ -55,7 +64,7 @@ body {
   }
   
   #player {
-    background-color: greenyellow;
+    background-image: url('images/sda-pout.png');
     height: 40px;
     width: 40px;
     border-radius: 50%;
@@ -76,7 +85,7 @@ body {
     color: white;
     text-align: center;
     font-size: 30px;
-    height: 200px;
+    height: 150px;
     width: 100%;
     position: absolute;
     border-style: hidden;
@@ -126,6 +135,7 @@ body {
     margin-right: 50%;
 
     transform: translate(-50%, -50%);     
+    cursor:pointer;
     }
   
     h2{
