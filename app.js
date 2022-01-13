@@ -106,7 +106,7 @@ const bigScoreEl = document.querySelector('#bigScoreEl')
     let particles = []
 
     function init() {
-     player = new Player(x,y,10,'black')
+     player = new Player(x,y,10,'white')
      projectiles = [] //array to loop in animate (management of instances of multiple)
      enemies = []
      particles = []
@@ -130,7 +130,7 @@ const bigScoreEl = document.querySelector('#bigScoreEl')
         x = Math.random() * canvas.width
         y = Math.random() < 0.5 ? 0 - radius : canvas.height + radius
       }
-      const color = `hsl(${Math.random() * 360},50%,50%)`
+      let color = `hsl(${Math.random() * 360},50%,50%)`
 
         const angle = Math.atan2( //angle based on x and y
           canvas.height / 2 - y, canvas.width /2 - x
@@ -151,7 +151,7 @@ const bigScoreEl = document.querySelector('#bigScoreEl')
     function animate(){
       animationId = requestAnimationFrame(animate)
       c.fillstyle = 'orange'
-      c.fillRect(0, 0,canvas.width, canvas.height)
+      c.clearRect(0, 0,canvas.width, canvas.height)
       player.draw() //draw in the animate as calling outside will disappear
       //console.log('go')
       particles.forEach((particle,index)=>{
@@ -199,7 +199,7 @@ const bigScoreEl = document.querySelector('#bigScoreEl')
             projectile.y - enemy.y)
 
             //console.log(dist)
-//when projectiles touch enemy 
+//WHEN projectiles touch enemy 
 
             if(dist - enemy.radius - projectile.radius < 1)
             {
@@ -209,17 +209,17 @@ const bigScoreEl = document.querySelector('#bigScoreEl')
 
               //create explosion effect
               for (let i = 0; i < 2; i++){
-                projectiles.push(new Particle(projectile.x,
+                particles.push(new Particle(projectile.x,
                   projectile.y, 3,enemy.color,
                    {
-                    x: (Math.random() - 0.5 * (Math.random() * 3)), 
-                    y: (Math.random() - 0.5 * (Math.random() * 3))
+                    x: (Math.random() - 0.5 * (Math.random() * 1)), 
+                    y: (Math.random() - 0.5 * (Math.random() * 1))
                   }))
               } //hit those enemy become smaller
               if(enemy.radius - 10 > 5){ //remove those too small
                 score += 10
                 scoreEl.innerHTML = score
-          
+  
                 
                 gsap.to(enemy,{
                   radius: enemy.radius - 10
@@ -265,7 +265,7 @@ addEventListener('click',(event) => {
 
   projectiles.push(
     new Projectile(canvas.width/2,
-      canvas.height / 2, 10, 'black', velocity)
+      canvas.height / 2, 10, 'white', velocity)
   )
 })
 

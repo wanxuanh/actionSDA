@@ -7,9 +7,18 @@ h1 {
     text-align: center;
 }
 
-/* body {
+body {
     background:linear-gradient(0deg,rgba(34,193,194,1)0%,rgba(253,187,45,1)100%);
-  } */
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+  }
+
+#canvas{
+  /*background:linear-gradient(0deg,rgba(34,193,194,1)0%,rgba(253,187,45,1)100%);
+*/
+  border:darkblue;
+}
   .score{
     color: brown;
     font-size: 20px;
