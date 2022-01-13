@@ -17,12 +17,23 @@ Project #1: Action, SDA!
 
 
   # Project Timeline
-    Week 1 | (Ideation) :  Defining Game play, look for images, research what logic/calculation for the game
-    Week 2 |  (Action)  :  Understanding the calculation, logic while starting up the game board afresh,
-                           Game Player and Enemies up, with shooter. Check for collision. 
-    Week 3 | (Progress)
-    Week 4 | (Touch-up)
+  <h3>Week 1 | (Ideation) :   [27 Dec - 02 Jan] </h3>
+  
+  - Defining Game play, look for images, research what logic/calculation for the game
+   
+  <h3> Week 2 |  (Action) :    [03 Jan - 09 Jan]  </h3>
+  
+  - Understanding the calculation, logic while starting up the game board afresh,
+  - Game Player and Enemies up, with shooter. Check for collision. 
+  
+  <h3>   Week 3 | (Progress and touch up) :  [10 Jan - 16 Jan]</h3>
+  
+  
+  - Game Over - Restart Game
+  - Game player image up
+  - Check for shooter angle
 
+   
   # Technologies used
     
     Function
@@ -34,21 +45,22 @@ Project #1: Action, SDA!
     
    
     
-<h2>Game play: </h2>
+# Game play:
 
 <p>Groups of 5 only:</p>
 
 
 <p> "Hi, show your otter pass please! vaccinated!"</p>
 
-  <h1> construction in progress </h1>
-  <h3> please come back later.. </h3>
+  <h3> Catch those that are not maintaining their social distancing.<br>
+    Once you are a close contact, game over! </h3>
 
 
 # Reference
-https://github.com/rembound/Bubble-Shooter-HTML5
-https://www.youtube.com/watch?v=eI9idPTT0c4
-    
+- https://github.com/rembound/Bubble-Shooter-HTML5
+- https://www.youtube.com/watch?v=eI9idPTT0c4
+- http://clipart-library.com/clipart/890575.htm  
+  
 </body>
 </html>
 
