@@ -130,7 +130,7 @@ let y = canvas.height / 2
 
 let images = []
 let player = new Player(canvas.width / 2,
-  canvas.height / 7, 100, 'black')
+  canvas.height / 7, 100, 'transparent')
 
 const playerImage = new Image()
 playerImage.src = 'images/guard.jpg'
