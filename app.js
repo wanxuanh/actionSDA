@@ -129,7 +129,8 @@ let x = canvas.width / 2
 let y = canvas.height / 2
 
 let images = []
-let player = new Player(950, 100, 100, 'transparent')
+let player = new Player(canvas.width / 2,
+  canvas.height / 7, 100, 'black')
 
 const playerImage = new Image()
 playerImage.src = 'images/guard.jpg'
@@ -177,13 +178,13 @@ function spawnEnemies() {
     let color = `hsl(${Math.random() * 360},50%,50%)`
 
     //angle where the enemy spawn towards
-    const angle = Math.atan2(
-      50 - canvas.height,
-      canvas.width
-    )
-    // const angle = Math.atan2( //angle based on x and y
-    //   canvas.height / 2 - y, canvas.width / 2 - x
-    //) //displays radian
+    // const angle = Math.atan2(
+    //   50 - canvas.height ,
+    //   canvas.width
+    // )
+    const angle = Math.atan2( //angle based on x and y
+      y - canvas.height + 20, canvas.width / 2 - x
+    ) //displays radian
 
 
     const velocity = {
@@ -230,7 +231,8 @@ function animate() {
   //c.fillstyle = 'orange'
   c.clearRect(0, 0, canvas.width, canvas.height)
   //c.drawImage(playerImage, this.x, this.y, this.size, this.size))
-  c.drawImage(playerImage, 50,100,630,650,800,-100,260,280)// sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight
+  c.drawImage(playerImage, 50,100,630,canvas.width / 2,
+    canvas.width / 2.5,-100,260,280)// sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight
   player.draw() //draw in the animate as calling outside will disappear
   //console.log('go')
   particles.forEach((particle, index) => {
@@ -269,6 +271,7 @@ function animate() {
       cancelAnimationFrame(animationId)
       modaelEl.style.display = 'flex'
       bigScoreEl.innerHTML = score
+      window.removeEventListener('click', animate)
 
       //console.log('end game')
     }
