@@ -13,6 +13,20 @@ const startGame = document.querySelector('#startGame')
 const modaelEl = document.querySelector('#modaelEl')
 const bigScoreEl = document.querySelector('#bigScoreEl')
 
+let frame = 0;
+
+let images = []
+
+const enemyTypes = [];
+
+const playerImage = new Image()
+playerImage.src = 'images/guard.jpg'
+
+const enemyImage = new Image()
+enemyImage.src = 'images/shopper.png'
+enemyTypes.push(enemyImage)
+
+
 //********************************************************
 //CLASS PLAYER
 //********************************************************
@@ -69,19 +83,27 @@ class Enemy {
     this.color = color
     this.velocity = velocity
   }
+ 
+ 
   draw() {
     c.save()
     c.globalAlpha = this.alpha
     c.beginPath()
-    c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false)
-    c.fillStyle = this.color
+    c.rect(this.x, this.y, 20,20)
+    c.arc(this.x, this.y, this.radius, 0, Math.PI * 1.2, 2)
+    c.fillStyle = `hsl(${Math.random() * 360},70%,40%)`
+    //c.fillStyle = this.color
     c.fill()
+    //c.stroke() = 'black'
+    //c.drawImage(enemyImage,50,50)
     c.restore()
   }
   update() {
     this.draw()
     this.x = this.x + this.velocity.x
     this.y = this.y + this.velocity.y
+    if(this.frameX < this.maxFrame) this.frameX++;
+    else this.frameX - this.minFrame
   }
 }
 //********************************************************
@@ -128,15 +150,10 @@ class Particle {
 let x = canvas.width / 2
 let y = canvas.height / 2
 
-let images = []
+
 let player = new Player(canvas.width / 2,
   canvas.height / 7, 120, 'transparent')
 
-const playerImage = new Image()
-playerImage.src = 'images/guard.jpg'
-
-const enemyImage = new Image()
-enemyImage.src = 'images/shopper.png'
 
 let projectiles = [] //array to loop in animate (management of instances of multiple)
 let enemies = []
@@ -147,7 +164,7 @@ let particles = []
 //********************************************************
 
 function init() {
-  image = []
+  images = []
   //player = new Player(300, y, 30, 'black')
   projectiles = [] //array to loop in animate (management of instances of multiple)
   enemies = []
@@ -170,7 +187,7 @@ function spawnEnemies() {
     let x
     let y //let it not be a const
     
-    let enemy = new Enemy()
+    //let enemy = new Enemy()
 
     // if (Math.random() < 0.5) {
     //   x = Math.random() < 0.5 ? 0 - radius : canvas.width + radius //left side
@@ -185,7 +202,7 @@ function spawnEnemies() {
      x = Math.random() < 0.5 ? 0 - radius : canvas.width + radius //left side
      y = Math.random() * canvas.height
 
-    let color = `hsl(${Math.random() * 360},50%,50%)`
+    let color = `hsl(${Math.random() * 360},50%,40%)`
 
     //angle where the enemy spawn towards
     const angle = Math.atan2(
@@ -201,7 +218,7 @@ function spawnEnemies() {
       x: Math.cos(angle),
       y: Math.sin(angle)
     }
-    //enemies.push()
+   
     //enemies.push(new Enemy())
     enemies.push(new Enemy(x, y, radius, color, velocity))
   }, 400)
@@ -221,8 +238,8 @@ function animate() {
   //c.fillstyle = 'orange'
   c.clearRect(0, 0, canvas.width, canvas.height)
   //c.drawImage(playerImage, this.x, this.y, this.size, this.size))
-  attachImage(playerImage, 50,100,630,canvas.width / 2,
-    canvas.width / 2.5,-100,260,280)// sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight
+  attachImage(playerImage, 50,80,630,820,
+    canvas.width / 2.5,-80,260,280)// sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight
   //player.draw() //draw in the animate as calling outside will disappear
   //console.log('go')
   particles.forEach((particle, index) => {
@@ -250,11 +267,10 @@ function animate() {
   })
 
   enemies.forEach((enemy, index) => {
-    //enemy.draw()
+   // enemy.draw()
    // attachEnemy(enemyImage,40,40)
-    console.log(enemy, index)
-   attachImage(enemyImage, 50,100,630,canvas.width / 2,
-    canvas.width / 2.5,-100,260,280);
+    //console.log(enemy, index)
+  
     enemy.update()
 
     //distance between player and enemy
@@ -292,7 +308,7 @@ function animate() {
               y: (Math.random() - 0.5 * (Math.random() * 1))
             }))
         } //hit those enemy become smaller
-        if (enemy.radius - 10 > 5) { //remove those too small
+        if (enemy.radius - 10 > 15) { //remove those too small
           score += 10
           scoreEl.innerHTML = score
 
@@ -338,14 +354,19 @@ addEventListener('click', (event) => {
 
   //change the interval
   const velocity = {
-    x: Math.cos(angle) * 30,
-    y: Math.sin(angle) * 30
+    x: Math.cos(angle) * 50,
+    y: Math.sin(angle) * 50
   }
+  projectiles.push(
+    new Projectile(canvas.width / 2,
+      canvas.height / 10, 5, 'rgb(153, 0, 255)', velocity)
+  )
 
   projectiles.push(
     new Projectile(canvas.width / 2,
       canvas.height / 10, 5, 'rgb(153, 0, 255)', velocity)
   )
+  
 })
 
 
