@@ -9,7 +9,7 @@ h1 {
     width: 600px;
     height: 80px;
     top: 0%;
-    left: 35%;
+    left: 30%;
     position: relative;
     /*background:linear-gradient(0deg,rgb(194, 34, 141)0%,rgba(253,187,45,1)100%);*/
 
@@ -20,11 +20,11 @@ p{
   background-color: white;
   width: 350px;
   top: 15%;
-  left: 40%;
+  left: 36%;
   border-radius: 5px;
   border-style: dotted;
   padding: 15px;
-  position: relative;
+  position:absolute;
 
 }
 

@@ -183,7 +183,7 @@ function spawnEnemies() {
     //   canvas.width
     // )
     const angle = Math.atan2( //angle based on x and y
-      y - canvas.height + 20, canvas.width / 2 - x
+      y - canvas.height, canvas.width / 2
     ) //displays radian
 
 
@@ -271,7 +271,7 @@ function animate() {
       cancelAnimationFrame(animationId)
       modaelEl.style.display = 'flex'
       bigScoreEl.innerHTML = score
-      window.removeEventListener('click', animate)
+     // window.removeEventListener('click', animate)
 
       //console.log('end game')
     }
@@ -334,14 +334,14 @@ function animate() {
 addEventListener('click', (event) => {
   //console.log(projectiles)
   const angle = Math.atan2( //angle based on x and y
-    event.clientY - canvas.height /2, event.clientX - canvas.width / 2
-  ) //displays radian
+    event.clientY - canvas.height /2 + 70, event.clientX - canvas.width /2 + 20
+ ) //displays radian
 
   // console.log(angle)
 
   //object
 
-  //change the speed
+  //change the interval
   const velocity = {
     x: Math.cos(angle) * 15,
     y: Math.sin(angle) * 15
@@ -349,7 +349,7 @@ addEventListener('click', (event) => {
 
   projectiles.push(
     new Projectile(canvas.width / 2,
-      canvas.height / 10, 4, 'yellowgreen', velocity)
+      canvas.height / 10, 2, 'black', velocity)
   )
 })
 
