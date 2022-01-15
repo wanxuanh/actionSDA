@@ -30,6 +30,7 @@ p{
 
 body {
   background-image: url('images/shoppingc.png');
+  /*opacity: 0.5;*/
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -61,18 +62,11 @@ body {
     border-style: outset;
     border-color: indianred;
   }
-  
-  #player {
-    background-color: black;
-  /*  background-image: url('images/sda-pout.png');*/
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    position: relative;
-    left: 50%;
-    top: 50%;
-  }
 
+  #projectiles{
+    border:rgb(153, 0, 255);
+    border-radius: 2px;
+  }
 /*Menu*/
   #modaelEl{
    

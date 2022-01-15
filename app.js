@@ -130,10 +130,13 @@ let y = canvas.height / 2
 
 let images = []
 let player = new Player(canvas.width / 2,
-  canvas.height / 7, 100, 'transparent')
+  canvas.height / 7, 120, 'transparent')
 
 const playerImage = new Image()
 playerImage.src = 'images/guard.jpg'
+
+const enemyImage = new Image()
+enemyImage.src = 'images/shopper.png'
 
 let projectiles = [] //array to loop in animate (management of instances of multiple)
 let enemies = []
@@ -166,58 +169,43 @@ function spawnEnemies() {
 
     let x
     let y //let it not be a const
+    
+    let enemy = new Enemy()
 
-    if (Math.random() < 0.5) {
-      x = Math.random() < 0.5 ? 0 - radius : canvas.width + radius //left side
-      y = Math.random() * canvas.height
-    }
-    else {
-      x = Math.random() * canvas.width
-      y = Math.random() < 0.5 ? 0 - radius : canvas.height + radius
-    }
+    // if (Math.random() < 0.5) {
+    //   x = Math.random() < 0.5 ? 0 - radius : canvas.width + radius //left side
+    //   //y = Math.random() * canvas.height
+    //   y = 200
+    // }
+    // else {
+    //  x = Math.random() * canvas.width
+    //  //y = Math.random() < 0.5 ? 0 - radius : canvas.height + radius
+    //   y = 200
+    // }
+     x = Math.random() < 0.5 ? 0 - radius : canvas.width + radius //left side
+     y = Math.random() * canvas.height
+
     let color = `hsl(${Math.random() * 360},50%,50%)`
 
     //angle where the enemy spawn towards
-    // const angle = Math.atan2(
-    //   50 - canvas.height ,
-    //   canvas.width
-    // )
-    const angle = Math.atan2( //angle based on x and y
-      y - canvas.height, canvas.width / 2
-    ) //displays radian
+    const angle = Math.atan2(
+    800 -  canvas.height ,
+      canvas.width
+    )
+    // const angle = Math.atan2( //angle based on x and y
+    //   y - canvas.height, canvas.width / 2
+    // ) //displays radian
 
 
     const velocity = {
       x: Math.cos(angle),
       y: Math.sin(angle)
     }
+    //enemies.push()
+    //enemies.push(new Enemy())
     enemies.push(new Enemy(x, y, radius, color, velocity))
   }, 400)
 }
-
-// function SpawnEnemies(){
-//   setInterval(() =>{
-//     const x = Math.random() * canvas.width
-//     // const y = 100
-//     // const radius = 30
-//     // const color = 'green'
-
-//     const angle = Math.atan2(canvas.height/2 - y,
-//       canvas.width /2 - x)
-
-//       const velocity = {
-//         x: Math.cos(angle),
-//         y: Math.sin(angle)
-//       }
-//       enemies.push(new Enemy(x,y,radius,color,
-//         velocity))
-//       },1000)
-
-// }
-
-// function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH) {
-//   ctx.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH)
-// }
 
 let animationId
 let score = 0
@@ -225,15 +213,17 @@ let score = 0
 //********************************************************
 //ANIMATE
 //********************************************************
-
+function attachImage(img, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight) {
+  c.drawImage(img, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
+}
 function animate() {
   animationId = requestAnimationFrame(animate)
   //c.fillstyle = 'orange'
   c.clearRect(0, 0, canvas.width, canvas.height)
   //c.drawImage(playerImage, this.x, this.y, this.size, this.size))
-  c.drawImage(playerImage, 50,100,630,canvas.width / 2,
+  attachImage(playerImage, 50,100,630,canvas.width / 2,
     canvas.width / 2.5,-100,260,280)// sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight
-  player.draw() //draw in the animate as calling outside will disappear
+  //player.draw() //draw in the animate as calling outside will disappear
   //console.log('go')
   particles.forEach((particle, index) => {
     if (particle.alpha <= 0.4) {
@@ -260,6 +250,11 @@ function animate() {
   })
 
   enemies.forEach((enemy, index) => {
+    //enemy.draw()
+   // attachEnemy(enemyImage,40,40)
+    console.log(enemy, index)
+   attachImage(enemyImage, 50,100,630,canvas.width / 2,
+    canvas.width / 2.5,-100,260,280);
     enemy.update()
 
     //distance between player and enemy
@@ -343,13 +338,13 @@ addEventListener('click', (event) => {
 
   //change the interval
   const velocity = {
-    x: Math.cos(angle) * 15,
-    y: Math.sin(angle) * 15
+    x: Math.cos(angle) * 30,
+    y: Math.sin(angle) * 30
   }
 
   projectiles.push(
     new Projectile(canvas.width / 2,
-      canvas.height / 10, 2, 'black', velocity)
+      canvas.height / 10, 5, 'rgb(153, 0, 255)', velocity)
   )
 })
 
@@ -359,11 +354,12 @@ startGame.addEventListener('click', () => {
   animate()
   spawnEnemies()
 
+
   //scoreEl.style.display = "none"
   modaelEl.style.display = "none"
 
-  addEventListener("mousemove", onMouseMove);
-  addEventListener("mousedown", onMouseDown);
+  //addEventListener("mousemove", onMouseMove);
+  //addEventListener("mousedown", onMouseDown);
   //bigScoreEl.style.display = "none"
 })
     //console.log('go')
