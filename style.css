@@ -17,7 +17,7 @@ h1 {
 p{
   text-align: center;
   font-size: small;
-  background-color: white;
+  background-color: yellow;
   width: 350px;
   top: 15%;
   left: 36%;
@@ -53,9 +53,8 @@ body {
     color: white;
     font-size: 25px;
     margin: 20px;
-    font-family: 'Press Start 2P', cursive;
     position: absolute;
-    background-color: brown;
+    background-color: orangered;
 
     }
     
@@ -97,21 +96,15 @@ body {
   }
 
   #bigScoreEl{
-    margin: auto;
-    text-align: center;
-    background-color: red;
-    color: blue;
-    border-radius: 5px;
-    font-size: 30px;
-    height: 0px;
-    width: 0px;
+    background-color: rgb(87, 86, 86);
+       text-shadow: 0 0 35px purple, 0 0 5px #0000FF;      
+       color: red;
+       font-family: 'Press Start 2P', fantasy;
+       text-align: center;
+       font-size: 40px;
     position: absolute;
-    border-radius: 5px;
-    border-style: hidden;
-    top: 30%;
-    left: 50%;
-    margin-right: 50%;
-    transform: translate(-50%, -50%);     
+    top: -60%;
+    left: 55%;
 
   }
 
@@ -172,5 +165,13 @@ body {
 
     }
 
+    .para2{
+      width: 100%;
+      padding-top: 200px;
+      font-size: 20px;
+      padding: 10%;
+      top: -20%;
+      
+    }
 
 

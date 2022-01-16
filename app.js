@@ -284,12 +284,11 @@ function animate() {
     //end game
     if (dist - enemy.radius - player.radius < 1) {
       cancelAnimationFrame(animationId)
-      //endingText.style.display = "flex"
-      gameOver.style.display = "flex"
-      modaelEl.style.display = 'flex'
-      //bigScoreEl.style.display ="flex"
-      bigScoreEl.innerHTML = score
+      bigScoreEl.style.display ="flex"
       scoreEl.style.display = "flex"
+      modaelEl.style.display = 'flex'
+      bigScoreEl.innerHTML = score
+      gameOver.style.display = "flex"
 
     
       
@@ -380,8 +379,9 @@ addEventListener('click', (event) => {
   
 })
 
-gameOver.style.display = "none"
 bigScoreEl.style.display = "none"
+gameOver.style.display = "none"
+
 //endingText.style.display = "none"
 
 
@@ -394,6 +394,7 @@ startGame.addEventListener('click', () => {
   //scoreEl.style.display = "none"
   modaelEl.style.display = "none"
   menu.style.display = "none"
+  gameOver.style.display = "none"
 
   
   //addEventListener("mousemove", onMouseMove);
