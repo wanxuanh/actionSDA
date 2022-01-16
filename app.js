@@ -12,8 +12,9 @@ const scoreEl = document.querySelector('#scoreEl')
 const startGame = document.querySelector('#startGame')
 const modaelEl = document.querySelector('#modaelEl')
 const bigScoreEl = document.querySelector('#bigScoreEl')
-const menu = document.querySelector("#menu")
-const gameOver = document.querySelector("#gameOver")
+const menu = document.querySelector('#menu')
+const gameOver = document.querySelector('#gameOver')
+//const endingText = document.querySelector('#endingText')
 
 let frame = 0;
 
@@ -283,11 +284,13 @@ function animate() {
     //end game
     if (dist - enemy.radius - player.radius < 1) {
       cancelAnimationFrame(animationId)
+      //endingText.style.display = "flex"
       gameOver.style.display = "flex"
       modaelEl.style.display = 'flex'
       //bigScoreEl.style.display ="flex"
       bigScoreEl.innerHTML = score
       scoreEl.style.display = "flex"
+
     
       
      // window.removeEventListener('click', animate)
@@ -379,6 +382,8 @@ addEventListener('click', (event) => {
 
 gameOver.style.display = "none"
 bigScoreEl.style.display = "none"
+//endingText.style.display = "none"
+
 
 startGame.addEventListener('click', () => {
   init()

@@ -39,6 +39,9 @@ body {
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
     cursor:crosshair;
+    width: -moz-min-content;    /* Firefox */
+    width: -webkit-min-content; /* Chrome */
+    width: min-content;
   }
 
 #canvas{
@@ -137,7 +140,7 @@ body {
       font-size: x-small;
     }
 
-    #menu, #gameOver {
+    #menu,#gameOver {
    
       background-color: rgb(87, 86, 86);
        text-shadow: 0 0 35px purple, 0 0 5px #0000FF;      
@@ -156,6 +159,7 @@ body {
        transform: translate(-50%, -50%);     
    
      }
+
     .para {
       text-shadow:5px 5px 3px black;
       color: white;
@@ -167,3 +171,6 @@ body {
       line-height: 1.4;
 
     }
+
+
+
