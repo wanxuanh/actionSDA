@@ -14,26 +14,20 @@ const modaelEl = document.querySelector('#modaelEl')
 const bigScoreEl = document.querySelector('#bigScoreEl')
 const menu = document.querySelector('#menu')
 const gameOver = document.querySelector('#gameOver')
-//const endingText = document.querySelector('#endingText')
 
 let frame = 0;
 
 let images = []
 
-const enemyTypes = [];
-
 const playerImage = new Image()
 playerImage.src = 'images/guard.jpg'
 
-const enemyImage = new Image()
-enemyImage.src = 'images/shopper.png'
-enemyTypes.push(enemyImage)
 
-const gameLoadAudio = new Audio(src= 'https://www.myinstants.com/media/sounds/the-pink-panther-theme-song-original-version.mp3')
-const gameOverAudio = new Audio(src= 'sounds/gameover.wav')
+const gameLoadAudio = new Audio(src = 'https://www.myinstants.com/media/sounds/the-pink-panther-theme-song-original-version.mp3')
+const gameOverAudio = new Audio(src = 'sounds/gameover.wav')
 
-function bubbleAudio(){
-  let sound = new Audio(src ='sounds/barcode.mp3')
+function bubbleAudio() {
+  let sound = new Audio(src = 'sounds/barcode.mp3')
   sound.load()
   sound.play()
   sound.volume = 0.3
@@ -96,13 +90,13 @@ class Enemy {
     this.color = color
     this.velocity = velocity
   }
- 
- 
+
+
   draw() {
     c.save()
     c.globalAlpha = this.alpha
     c.beginPath()
-    c.rect(this.x, this.y, 20,20)
+    c.rect(this.x, this.y, 20, 20)
     c.arc(this.x, this.y, this.radius, 0, Math.PI * 1.2, 2)
     c.fillStyle = `hsl(${Math.random() * 360},70%,40%)`
     //c.fillStyle = this.color
@@ -115,7 +109,7 @@ class Enemy {
     this.draw()
     this.x = this.x + this.velocity.x
     this.y = this.y + this.velocity.y
-    if(this.frameX < this.maxFrame) this.frameX++;
+    if (this.frameX < this.maxFrame) this.frameX++;
     else this.frameX - this.minFrame
   }
 }
@@ -201,7 +195,7 @@ function spawnEnemies() {
 
     let x
     let y //let it not be a const
-    
+
     //let enemy = new Enemy()
 
     // if (Math.random() < 0.5) {
@@ -214,14 +208,14 @@ function spawnEnemies() {
     //  //y = Math.random() < 0.5 ? 0 - radius : canvas.height + radius
     //   y = 200
     // }
-     x = Math.random() < 0.5 ? 0 - radius : canvas.width + radius //left side
-     y = Math.random() * canvas.height
+    x = Math.random() < 0.5 ? 0 - radius : canvas.width + radius //left side
+    y = Math.random() * canvas.height
 
     let color = `hsl(${Math.random() * 360},50%,40%)`
 
     //angle where the enemy spawn towards
     const angle = Math.atan2(
-    800 -  canvas.height ,
+      800 - canvas.height,
       canvas.width
     )
     // const angle = Math.atan2( //angle based on x and y
@@ -233,7 +227,7 @@ function spawnEnemies() {
       x: Math.cos(angle),
       y: Math.sin(angle)
     }
-   
+
     //enemies.push(new Enemy())
     enemies.push(new Enemy(x, y, radius, color, velocity))
   }, 400)
@@ -253,8 +247,8 @@ function animate() {
   //c.fillstyle = 'orange'
   c.clearRect(0, 0, canvas.width, canvas.height)
   //c.drawImage(playerImage, this.x, this.y, this.size, this.size))
-  attachImage(playerImage, 50,80,630,820,
-    canvas.width / 2.5,-80,260,280)// sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight
+  attachImage(playerImage, 50, 80, 630, 820,
+    canvas.width / 2.5, -80, 260, 280)// sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight
   //player.draw() //draw in the animate as calling outside will disappear
   //console.log('go')
   particles.forEach((particle, index) => {
@@ -282,10 +276,10 @@ function animate() {
   })
 
   enemies.forEach((enemy, index) => {
-   // enemy.draw()
-   // attachEnemy(enemyImage,40,40)
+    // enemy.draw()
+    // attachEnemy(enemyImage,40,40)
     //console.log(enemy, index)
-  
+
     enemy.update()
 
     //distance between player and enemy
@@ -295,7 +289,7 @@ function animate() {
     //end game
     if (dist - enemy.radius - player.radius < 1) {
       cancelAnimationFrame(animationId)
-      bigScoreEl.style.display ="flex"
+      bigScoreEl.style.display = "flex"
       scoreEl.style.display = "flex"
       modaelEl.style.display = 'flex'
       bigScoreEl.innerHTML = score
@@ -303,10 +297,7 @@ function animate() {
       gameOverAudio.play()
       gameLoadAudio.pause()
 
-
-    
-      
-     // window.removeEventListener('click', animate)
+      // window.removeEventListener('click', animate)
 
       //console.log('end game')
     }
@@ -369,8 +360,8 @@ function animate() {
 addEventListener('click', (event) => {
   //console.log(projectiles)
   const angle = Math.atan2( //angle based on x and y
-    event.clientY - canvas.height /2 + 70, event.clientX - canvas.width /2 + 20
- ) //displays radian
+    event.clientY - canvas.height / 2 + 70, event.clientX - canvas.width / 2 + 20
+  ) //displays radian
 
   // console.log(angle)
 
@@ -383,18 +374,17 @@ addEventListener('click', (event) => {
   }
   projectiles.push(
     new Projectile(canvas.width / 2,
-      canvas.height / 10, 5, 'rgb(153, 0, 255)', velocity)
+      canvas.height / 10, 5, 'rgb(153, 0, 0)', velocity)
   )
 
-      bubbleAudio()
-  
+  bubbleAudio()
+
 })
 
 bigScoreEl.style.display = "none"
 gameOver.style.display = "none"
 
 //endingText.style.display = "none"
-
 
 startGame.addEventListener('click', () => {
   init()
@@ -406,10 +396,12 @@ startGame.addEventListener('click', () => {
   modaelEl.style.display = "none"
   menu.style.display = "none"
   gameOver.style.display = "none"
+  gameLoadAudio.play()
+  gameLoadAudio.loop = true;
 
-  
+
   //addEventListener("mousemove", onMouseMove);
   //addEventListener("mousedown", onMouseDown);
   //bigScoreEl.style.display = "none"
 })
-    //console.log('go')
+ 
