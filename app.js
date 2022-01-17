@@ -29,6 +29,16 @@ const enemyImage = new Image()
 enemyImage.src = 'images/shopper.png'
 enemyTypes.push(enemyImage)
 
+const gameLoadAudio = new Audio(src= 'https://www.myinstants.com/media/sounds/the-pink-panther-theme-song-original-version.mp3')
+const gameOverAudio = new Audio(src= 'sounds/gameover.wav')
+
+function bubbleAudio(){
+  let sound = new Audio(src ='sounds/barcode.mp3')
+  sound.load()
+  sound.play()
+  sound.volume = 0.3
+}
+
 
 //********************************************************
 //CLASS PLAYER
@@ -175,6 +185,7 @@ function init() {
   score = 0
   scoreEl.innerHTML = score
   bigScoreEl.innerHTML = score
+  gameLoadAudio.play()
 
 
 }
@@ -289,6 +300,9 @@ function animate() {
       modaelEl.style.display = 'flex'
       bigScoreEl.innerHTML = score
       gameOver.style.display = "flex"
+      gameOverAudio.play()
+      gameLoadAudio.pause()
+
 
     
       
@@ -372,10 +386,7 @@ addEventListener('click', (event) => {
       canvas.height / 10, 5, 'rgb(153, 0, 255)', velocity)
   )
 
-  projectiles.push(
-    new Projectile(canvas.width / 2,
-      canvas.height / 10, 5, 'rgb(153, 0, 255)', velocity)
-  )
+      bubbleAudio()
   
 })
 
