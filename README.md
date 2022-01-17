@@ -1,6 +1,8 @@
 # <strong><em>Action, SDA!</em></strong>
 <html>
 <body>
+  
+  Click https://wanxuanh.github.io/actionSDA/ to accept the challenge!
 
   # Project 1 - My First Game Requirements
     
