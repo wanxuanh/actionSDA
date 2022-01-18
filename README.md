@@ -79,7 +79,14 @@ Project #1: - Action, SDA!
     Class
     Array
     Call-back Function
+    Event Listener
+    DOM-Manipulation
     
+ # Installation Instructions
+  
+  Clone this repo to your local (https://github.com/wanxuanh/actionSDA.git)
+  
+  
 
 # Reference
 - https://github.com/rembound/Bubble-Shooter-HTML5
