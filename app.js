@@ -23,6 +23,11 @@ const playerImage = new Image()
 playerImage.src = 'images/guard.jpg'
 
 
+const projectileImg = [];
+const projectile1 = new Image();
+projectile1.src = "images/syring.png"
+projectileImg.push(projectile1)
+
 const gameLoadAudio = new Audio(src = 'https://www.myinstants.com/media/sounds/the-pink-panther-theme-song-original-version.mp3')
 const gameOverAudio = new Audio(src = 'sounds/gameover.wav')
 
@@ -64,6 +69,8 @@ class Projectile {
     this.radius = radius
     this.color = color
     this.velocity = velocity
+    this.projectileImg = projectileImg[0];
+
   }
   draw() {
     c.beginPath()
@@ -73,8 +80,12 @@ class Projectile {
   }
   update() {
     this.draw()
+    c.drawImage(this.projectileImg,10,10,40,40)
+
     this.x = this.x + this.velocity.x
     this.y = this.y + this.velocity.y
+    //if(this.frameX < this.maxFrame) this.frameX++;
+    //else this.frameX = this.minFrame;
 
   }
 }
@@ -90,7 +101,6 @@ class Enemy {
     this.color = color
     this.velocity = velocity
   }
-
 
   draw() {
     c.save()
