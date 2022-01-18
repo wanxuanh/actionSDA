@@ -27,7 +27,7 @@ Project #1: - Action, SDA!
   
   <p>The goal of the game is to clear the playing field by forming groups of three or more marbles of the same color. The game ends when the balls reach the bottom line of the screen. The more balls destroyed in one shot, the more points scored. A player wins when there are no balls remaining on the playing field. </p>
   
-  In this pandemic, taking the concept of Bubble Shooter, the game play is to catch those that are not maintaining their social distancing. While ensuring safety measures are adhered to, brownie points are given to the player when they manage to break the clusters. Ensure there's no close contact with the player and enemies or else, <strong>GAME OVER!</strong>
+  In this pandemic, taking the concept of Bubble Shooter, the game play is to catch those that are not maintaining their social distancing. While ensuring safety measures are adhered to, brownie points are given to the player when they manage to break the clusters. Ensure there's no close contact with the SDA and the spawning humans or else, <strong>GAME OVER!</strong>
   
   
   
@@ -71,7 +71,11 @@ Project #1: - Action, SDA!
   - Enemy changed to shapes instead of images
   - Start Screen and Game Over screen done
   - Add sound effects
-
+  
+  <h3> Challenges ahead </h3>
+  
+  - Giving more context, add image like virus and vaccine syringes (rotating the direction of syringes based on angle)
+  - Add more challenges and meaningful acts based on game play
    
   # Technologies used
     
