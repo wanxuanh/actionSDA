@@ -22,6 +22,9 @@ let images = []
 const playerImage = new Image()
 playerImage.src = 'images/guard.jpg'
 
+const enemyImage = new Image()
+enemyImage.src = 'images/virus.gif'
+
 
 const projectileImg = [];
 const projectile1 = new Image();
@@ -74,13 +77,18 @@ class Projectile {
   }
   draw() {
     c.beginPath()
+    c.rect(this.x, this.y, 10, 10)
+    c.arc(this.x, this.y, this.radius, 0, Math.PI * 1.2, false)
     c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false)
+    c.arc(this.x, this.y, this.radius, 0, Math.PI * 1.5, false)
+   // c.drawImage(this.projectileImg,this.x,this.y,40,40)
+
     c.fillStyle = this.color
     c.fill()
   }
   update() {
     this.draw()
-    c.drawImage(this.projectileImg,10,10,40,40)
+    //c.drawImage(this.projectileImg,10,10,40,40)
 
     this.x = this.x + this.velocity.x
     this.y = this.y + this.velocity.y
@@ -112,7 +120,7 @@ class Enemy {
     //c.fillStyle = this.color
     c.fill()
     //c.stroke() = 'black'
-    //c.drawImage(enemyImage,50,50)
+   // c.drawImage(enemyImage,this.x, this.y, 50,50)
     c.restore()
   }
   update() {
@@ -384,7 +392,7 @@ addEventListener('click', (event) => {
   }
   projectiles.push(
     new Projectile(canvas.width / 2,
-      canvas.height / 10, 5, 'rgb(153, 0, 0)', velocity)
+      canvas.height / 10, 5, 'rgb(40, 253, 40)', velocity)
   )
 
   bubbleAudio()
