@@ -242,7 +242,7 @@ function spawnEnemies() {
 
 
     const velocity = {
-      x: Math.cos(angle),
+      x: Math.cos(angle) * 2.5,
       y: Math.sin(angle)
     }
 
