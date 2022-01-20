@@ -79,6 +79,9 @@ Project #1: - Action, SDA!
    
   # Technologies used
     
+    HTML
+    CSS
+    JS
     Function
     Class
     Array
@@ -96,6 +99,7 @@ Project #1: - Action, SDA!
 - https://github.com/rembound/Bubble-Shooter-HTML5
 - https://www.youtube.com/watch?v=eI9idPTT0c4
 - http://clipart-library.com/clipart/890575.htm  
+- https://www.chosic.com/download-audio/28063/
   
 
 </body>
