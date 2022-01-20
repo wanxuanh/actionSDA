@@ -31,11 +31,11 @@ const projectile1 = new Image();
 projectile1.src = "images/syring.png"
 projectileImg.push(projectile1)
 
-const gameLoadAudio = new Audio(src = 'https://www.myinstants.com/media/sounds/the-pink-panther-theme-song-original-version.mp3')
+const gameLoadAudio = new Audio(src = 'sounds/forestwalk.mp3') //https://www.myinstants.com/media/sounds/the-pink-panther-theme-song-original-version.mp3
 const gameOverAudio = new Audio(src = 'sounds/gameover.wav')
 
 function bubbleAudio() {
-  let sound = new Audio(src = 'sounds/barcode.mp3')
+  let sound = new Audio(src = 'sounds/bubbles.mp3')
   sound.load()
   sound.play()
   sound.volume = 0.3
